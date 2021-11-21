@@ -17,7 +17,7 @@
 				"spark.dynamicAllocation.enabled": "false",
 				"spark.dynamicAllocation.minExecutors": "2",
 				"spark.dynamicAllocation.maxExecutors": "2",
-				"spark.autotune.trackingId": "2084ac73-c3f2-47ab-94e9-f6e1c83f1b77"
+				"spark.autotune.trackingId": "89e94e1c-47ef-43c2-98a4-d9f894f45b15"
 			}
 		},
 		"metadata": {
@@ -177,7 +177,7 @@
 					}
 				},
 				"source": [
-					"# Escrever dados limpos em formato parque no azure storage\r\n",
+					"# Escrever dados limpos em formato parquet no azure storage\r\n",
 					"df.write.format('parquet').mode('overwrite').save('/history_zone/2019/EscolaridadeVitima/')"
 				],
 				"execution_count": null
