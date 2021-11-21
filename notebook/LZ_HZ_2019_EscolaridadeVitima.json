@@ -17,7 +17,7 @@
 				"spark.dynamicAllocation.enabled": "false",
 				"spark.dynamicAllocation.minExecutors": "2",
 				"spark.dynamicAllocation.maxExecutors": "2",
-				"spark.autotune.trackingId": "89e94e1c-47ef-43c2-98a4-d9f894f45b15"
+				"spark.autotune.trackingId": "b65c3a3a-a572-4421-bc97-4bdfa132b7e4"
 			}
 		},
 		"metadata": {
@@ -89,7 +89,7 @@
 					"    StructField(\"Total\", StringType(), True)\r\n",
 					"])"
 				],
-				"execution_count": null
+				"execution_count": 2
 			},
 			{
 				"cell_type": "code",
@@ -111,7 +111,7 @@
 					"            .options(quote='\"') \\\r\n",
 					"            .load('/landing_zone/2019/Balanco-2019-Ligue180-Escolaridade Vitima.csv')"
 				],
-				"execution_count": null
+				"execution_count": 3
 			},
 			{
 				"cell_type": "code",
@@ -135,7 +135,7 @@
 					"df = df.drop('None')\r\n",
 					"df = df.drop('Total')"
 				],
-				"execution_count": null
+				"execution_count": 4
 			},
 			{
 				"cell_type": "code",
@@ -161,7 +161,7 @@
 					"\r\n",
 					"df = df.fillna(0)"
 				],
-				"execution_count": null
+				"execution_count": 5
 			},
 			{
 				"cell_type": "code",
@@ -180,7 +180,7 @@
 					"# Escrever dados limpos em formato parquet no azure storage\r\n",
 					"df.write.format('parquet').mode('overwrite').save('/history_zone/2019/EscolaridadeVitima/')"
 				],
-				"execution_count": null
+				"execution_count": 6
 			},
 			{
 				"cell_type": "code",
@@ -199,7 +199,7 @@
 					"df = spark.read.parquet('/history_zone/2019/EscolaridadeVitima/')\r\n",
 					"df.toPandas()"
 				],
-				"execution_count": null
+				"execution_count": 7
 			}
 		]
 	}
