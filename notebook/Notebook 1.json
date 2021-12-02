@@ -17,7 +17,7 @@
 				"spark.dynamicAllocation.enabled": "false",
 				"spark.dynamicAllocation.minExecutors": "2",
 				"spark.dynamicAllocation.maxExecutors": "2",
-				"spark.autotune.trackingId": "4df2c7d9-fc69-4b8d-ae1b-34c5ffabf408"
+				"spark.autotune.trackingId": "0ffe478e-b094-425f-9275-565647720e69"
 			}
 		},
 		"metadata": {
@@ -54,7 +54,7 @@
 					"df = spark.read.parquet('/history_zone/2020/PrimeiroSemestre/')\r\n",
 					"df.limit(20).toPandas()"
 				],
-				"execution_count": 1
+				"execution_count": 27
 			},
 			{
 				"cell_type": "code",
@@ -88,10 +88,11 @@
 					}
 				},
 				"source": [
-					"#df.select('TipoViolacao').distinct().collect()\r\n",
-					"df.select('TipoViolacao').distinct().toPandas()"
+					"df.select('TipoViolacao').distinct().collect()\r\n",
+					"#df.select('TipoViolacao').distinct().toPandas()\r\n",
+					""
 				],
-				"execution_count": 15
+				"execution_count": 41
 			},
 			{
 				"cell_type": "code",
@@ -107,9 +108,10 @@
 					}
 				},
 				"source": [
-					"df.select('GrupoVulneravel').distinct().toPandas()"
+					"df.select('GrupoVulneravel').distinct().toPandas()\r\n",
+					"df.select('GrupoVulneravel').distinct().collect()"
 				],
-				"execution_count": 14
+				"execution_count": 45
 			},
 			{
 				"cell_type": "code",
@@ -161,7 +163,7 @@
 					}
 				},
 				"source": [
-					"df.select('DenunciaEmergencial').distinct().toPandas()"
+					"df.select('c').distinct().toPandas()"
 				],
 				"execution_count": 19
 			},
