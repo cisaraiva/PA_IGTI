@@ -1,0 +1,49 @@
+{
+	"name": "Notebook 2",
+	"properties": {
+		"nbformat": 4,
+		"nbformat_minor": 2,
+		"sessionProperties": {
+			"driverMemory": "28g",
+			"driverCores": 4,
+			"executorMemory": "28g",
+			"executorCores": 4,
+			"numExecutors": 2,
+			"conf": {
+				"spark.dynamicAllocation.enabled": "false",
+				"spark.dynamicAllocation.minExecutors": "2",
+				"spark.dynamicAllocation.maxExecutors": "2",
+				"spark.autotune.trackingId": "7b776c2d-15ec-45dd-829e-cec5178e969f"
+			}
+		},
+		"metadata": {
+			"saveOutput": true,
+			"enableDebugMode": false,
+			"kernelspec": {
+				"name": "synapse_pyspark",
+				"display_name": "python"
+			},
+			"language_info": {
+				"name": "python"
+			},
+			"sessionKeepAliveTimeout": 30
+		},
+		"cells": [
+			{
+				"cell_type": "code",
+				"source": [
+					"from csv import reader\r\n",
+					"# open file in read mode\r\n",
+					"with open('students.csv', 'r') as read_obj:\r\n",
+					"    # pass the file object to reader() to get the reader object\r\n",
+					"    csv_reader = reader(read_obj)\r\n",
+					"    # Iterate over each row in the csv using reader object\r\n",
+					"    for row in csv_reader:\r\n",
+					"        # row variable is a list that represents a row in csv\r\n",
+					"        print(row)"
+				],
+				"execution_count": null
+			}
+		]
+	}
+}
