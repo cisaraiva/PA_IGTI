@@ -17,7 +17,7 @@
 				"spark.dynamicAllocation.enabled": "false",
 				"spark.dynamicAllocation.minExecutors": "2",
 				"spark.dynamicAllocation.maxExecutors": "2",
-				"spark.autotune.trackingId": "b2768003-3e2d-4cca-b531-a71e2698f022"
+				"spark.autotune.trackingId": "8783e62d-4a1b-4442-ba76-947da5b7a60f"
 			}
 		},
 		"metadata": {
@@ -92,9 +92,11 @@
 				},
 				"source": [
 					"#df.groupBy(df['SexoVitima']).count().orderBy(df['SexoVitima'])\r\n",
-					"df.groupBy(df['SexoVitima']).count().orderBy(df['SexoVitima'])"
+					"df1 = df.groupBy(df['SexoVitima']).count().orderBy(df['SexoVitima'])\r\n",
+					"#df1.toPandas()\r\n",
+					"df1.printSchema"
 				],
-				"execution_count": 247
+				"execution_count": 256
 			},
 			{
 				"cell_type": "code",
