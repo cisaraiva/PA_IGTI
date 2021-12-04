@@ -17,7 +17,7 @@
 				"spark.dynamicAllocation.enabled": "false",
 				"spark.dynamicAllocation.minExecutors": "2",
 				"spark.dynamicAllocation.maxExecutors": "2",
-				"spark.autotune.trackingId": "3ee8b331-ef65-48f0-a9fb-7ca9d30392d0"
+				"spark.autotune.trackingId": "acc93520-d1ee-4c2b-aae3-d1dbe57015ab"
 			}
 		},
 		"metadata": {
@@ -70,9 +70,9 @@
 					}
 				},
 				"source": [
-					"df.printSchema()"
+					"df.groupBy(df[15]).count().orderBy(df[15]).toPandas()"
 				],
-				"execution_count": null
+				"execution_count": 83
 			},
 			{
 				"cell_type": "code",
@@ -88,9 +88,9 @@
 					}
 				},
 				"source": [
-					"df.groupBy(df[0]).count().toPandas().truncate(False)"
+					""
 				],
-				"execution_count": 60
+				"execution_count": null
 			}
 		]
 	}
