@@ -17,7 +17,7 @@
 				"spark.dynamicAllocation.enabled": "false",
 				"spark.dynamicAllocation.minExecutors": "2",
 				"spark.dynamicAllocation.maxExecutors": "2",
-				"spark.autotune.trackingId": "9e7265aa-5ae6-4ab8-94dc-64ee03b218fe"
+				"spark.autotune.trackingId": "77fbfbe3-2408-4f15-8774-ead646ef1a29"
 			}
 		},
 		"metadata": {
@@ -52,10 +52,10 @@
 				"cell_type": "code",
 				"source": [
 					"df = spark.read.parquet('/history_zone/2020/PrimeiroSemestre/')\r\n",
-					"df = df.where(df[11] != 'Bar')\r\n",
+					"#df = df.where(df[11] != 'Bar')\r\n",
 					"#df.select('EscolaridadeVitima','IdadeSuspeito','IdadeVitima','RacaSuspeito','RacaVitima','RelacaoVitimaSuspeito', 'TipoViolacao').toPandas()"
 				],
-				"execution_count": 144
+				"execution_count": 153
 			},
 			{
 				"cell_type": "code",
@@ -111,53 +111,6 @@
 					"#df.where(df[1] == 27).toPandas()"
 				],
 				"execution_count": 135
-			},
-			{
-				"cell_type": "code",
-				"metadata": {
-					"jupyter": {
-						"source_hidden": false,
-						"outputs_hidden": false
-					},
-					"nteract": {
-						"transient": {
-							"deleting": false
-						}
-					}
-				},
-				"source": [
-					"2020;\r\n",
-					"Trim 1;\r\n",
-					"janeiro;\r\n",
-					"9;\r\n",
-					"1. VIOLÊNCIA FÍSICA;\r\n",
-					"2-Violência Doméstica e Familiar Contra a Mulher;\r\n",
-					"AGRESSÃO/VIAS DE FATO;\r\n",
-					"BRASIL;\r\n",
-					"DF;\r\n",
-					"DENÚNCIA - ATENDIMENTO TELEFÔNICO;\r\n",
-					"NÃO;\r\n",
-					"ANÔNIMO;\r\n",
-					"N/D;\r\n",
-					"CASA ONDE RESIDE A VÍTIMA E O SUSPEITO;\r\n",
-					"\"\"\"AGRESSOR CÔNJUGE\";CONVIVENTE;ASCENDENTE;\"DESCENDENTE OU PARENTE\"\"\";\r\n",
-					"N/D;\r\n",
-					"COMPANHEIRO(A);\r\n",
-					"FEMININO;\r\n",
-					"21;\r\n",
-					"N/D;\r\n",
-					"N/D;\r\n",
-					"N/D;\r\n",
-					"BRASILEIRO(A);\r\n",
-					"N/D;\r\n",
-					"N/D;\r\n",
-					"FEMININO;\r\n",
-					"37 ANOS;\r\n",
-					"N/D;\r\n",
-					"N/D;\r\n",
-					"N/D"
-				],
-				"execution_count": null
 			}
 		]
 	}

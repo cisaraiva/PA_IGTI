@@ -17,7 +17,7 @@
 				"spark.dynamicAllocation.enabled": "false",
 				"spark.dynamicAllocation.minExecutors": "2",
 				"spark.dynamicAllocation.maxExecutors": "2",
-				"spark.autotune.trackingId": "5cc6addc-ba22-4d8e-8989-08785097fc56"
+				"spark.autotune.trackingId": "939dbe9f-ca1c-4e62-99da-e9f6b2441410"
 			}
 		},
 		"metadata": {
@@ -65,7 +65,7 @@
 					"import pandas\r\n",
 					"import pyspark.sql.functions as F"
 				],
-				"execution_count": 101
+				"execution_count": 108
 			},
 			{
 				"cell_type": "code",
@@ -92,7 +92,7 @@
 					")\r\n",
 					"display(df.limit(10))"
 				],
-				"execution_count": 102
+				"execution_count": 109
 			},
 			{
 				"cell_type": "code",
@@ -110,7 +110,7 @@
 				"source": [
 					"df.filter(df._c0.like('%\"%')).collect()"
 				],
-				"execution_count": 103
+				"execution_count": 110
 			},
 			{
 				"cell_type": "code",
@@ -129,7 +129,7 @@
 				"source": [
 					"display(df.limit(100))"
 				],
-				"execution_count": 104
+				"execution_count": 111
 			},
 			{
 				"cell_type": "code",
@@ -154,7 +154,7 @@
 					"\r\n",
 					""
 				],
-				"execution_count": null
+				"execution_count": 112
 			},
 			{
 				"cell_type": "code",
@@ -172,7 +172,7 @@
 				"source": [
 					"#df.collect()"
 				],
-				"execution_count": null
+				"execution_count": 113
 			},
 			{
 				"cell_type": "code",
@@ -190,7 +190,7 @@
 				"source": [
 					"df.write.mode(\"overwrite\").csv(\"/landing_zone/2020/primeiro_semestre_2020_1.csv\", encoding='ISO-8859-1')"
 				],
-				"execution_count": null
+				"execution_count": 114
 			}
 		]
 	}
