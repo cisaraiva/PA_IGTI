@@ -17,7 +17,7 @@
 				"spark.dynamicAllocation.enabled": "false",
 				"spark.dynamicAllocation.minExecutors": "2",
 				"spark.dynamicAllocation.maxExecutors": "2",
-				"spark.autotune.trackingId": "6804cf5f-34d3-46a0-bd66-c129d1481c0d"
+				"spark.autotune.trackingId": "e07b4a0d-43f3-4742-b17a-962cdd520ace"
 			}
 		},
 		"metadata": {
@@ -65,7 +65,7 @@
 					"import pandas\r\n",
 					"import pyspark.sql.functions as F"
 				],
-				"execution_count": 42
+				"execution_count": 50
 			},
 			{
 				"cell_type": "code",
@@ -92,7 +92,7 @@
 					")\r\n",
 					"display(df.limit(10))"
 				],
-				"execution_count": 43
+				"execution_count": 51
 			},
 			{
 				"cell_type": "code",
@@ -110,12 +110,12 @@
 				"source": [
 					"from pyspark.sql.functions import *\r\n",
 					"\r\n",
-					"df = df.withColumn('_c0', regexp_replace('_c0', '\"\"\"', ''''''))\r\n",
-					"df = df.withColumn('_c0', regexp_replace('_c0', '\"', ''''''))\r\n",
+					"df = df.withColumn('_c0', regexp_replace('_c0', '\"\"\"', ','))\r\n",
+					"df = df.withColumn('_c0', regexp_replace('_c0', '\"', ','))\r\n",
 					"\r\n",
 					"#df['_c0'] = df['_c0'].str.replace('N/D',None)"
 				],
-				"execution_count": 44
+				"execution_count": 52
 			},
 			{
 				"cell_type": "code",
@@ -133,7 +133,7 @@
 				"source": [
 					"df.write.mode(\"overwrite\").csv(\"/landing_zone/2020/primeiro_semestre_2020_1.csv\", encoding='ISO-8859-1')"
 				],
-				"execution_count": 47
+				"execution_count": 53
 			}
 		]
 	}

@@ -17,7 +17,7 @@
 				"spark.dynamicAllocation.enabled": "false",
 				"spark.dynamicAllocation.minExecutors": "2",
 				"spark.dynamicAllocation.maxExecutors": "2",
-				"spark.autotune.trackingId": "88c53422-3ede-423b-84ee-fe3b0fcd7a7a"
+				"spark.autotune.trackingId": "24b4f7f3-02e6-4cc4-b0df-286cf95a267f"
 			}
 		},
 		"metadata": {
@@ -52,10 +52,10 @@
 				"cell_type": "code",
 				"source": [
 					"df = spark.read.parquet('/history_zone/2020/PrimeiroSemestre/')\r\n",
-					"df = df.where(df[11] != 'Bar')\r\n",
+					"#df = df.where(df[11] != 'Bar')\r\n",
 					"#df.select('EscolaridadeVitima','IdadeSuspeito','IdadeVitima','RacaSuspeito','RacaVitima','RelacaoVitimaSuspeito', 'TipoViolacao').toPandas()"
 				],
-				"execution_count": 110
+				"execution_count": 119
 			},
 			{
 				"cell_type": "code",
@@ -71,9 +71,9 @@
 					}
 				},
 				"source": [
-					"df.groupBy(df[3]).count().orderBy(df[3]).toPandas()"
+					"df.groupBy(df[15]).count().orderBy(df[15]).toPandas()"
 				],
-				"execution_count": 111
+				"execution_count": 125
 			},
 			{
 				"cell_type": "code",
