@@ -17,7 +17,7 @@
 				"spark.dynamicAllocation.enabled": "false",
 				"spark.dynamicAllocation.minExecutors": "2",
 				"spark.dynamicAllocation.maxExecutors": "2",
-				"spark.autotune.trackingId": "acc93520-d1ee-4c2b-aae3-d1dbe57015ab"
+				"spark.autotune.trackingId": "88c53422-3ede-423b-84ee-fe3b0fcd7a7a"
 			}
 		},
 		"metadata": {
@@ -52,9 +52,10 @@
 				"cell_type": "code",
 				"source": [
 					"df = spark.read.parquet('/history_zone/2020/PrimeiroSemestre/')\r\n",
+					"df = df.where(df[11] != 'Bar')\r\n",
 					"#df.select('EscolaridadeVitima','IdadeSuspeito','IdadeVitima','RacaSuspeito','RacaVitima','RelacaoVitimaSuspeito', 'TipoViolacao').toPandas()"
 				],
-				"execution_count": 57
+				"execution_count": 110
 			},
 			{
 				"cell_type": "code",
@@ -70,9 +71,9 @@
 					}
 				},
 				"source": [
-					"df.groupBy(df[15]).count().orderBy(df[15]).toPandas()"
+					"df.groupBy(df[3]).count().orderBy(df[3]).toPandas()"
 				],
-				"execution_count": 83
+				"execution_count": 111
 			},
 			{
 				"cell_type": "code",
@@ -88,9 +89,10 @@
 					}
 				},
 				"source": [
-					""
+					"df.where((df[3] =='1-violência Contra A Mulher') | (df[3] == '2-violência Doméstica E Familiar Contra A Mulher')).toPandas()\r\n",
+					"#df.where(df[1] == 27).toPandas()"
 				],
-				"execution_count": null
+				"execution_count": 117
 			}
 		]
 	}
