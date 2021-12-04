@@ -17,7 +17,7 @@
 				"spark.dynamicAllocation.enabled": "false",
 				"spark.dynamicAllocation.minExecutors": "2",
 				"spark.dynamicAllocation.maxExecutors": "2",
-				"spark.autotune.trackingId": "779ef701-1cce-417d-aab8-60a5a3fe68c2"
+				"spark.autotune.trackingId": "12465e1e-e44d-469a-8323-24b6c9042671"
 			}
 		},
 		"metadata": {
@@ -55,7 +55,7 @@
 					"#df = df.where(df[11] != 'Bar')\r\n",
 					"#df.select('EscolaridadeVitima','IdadeSuspeito','IdadeVitima','RacaSuspeito','RacaVitima','RelacaoVitimaSuspeito', 'TipoViolacao').toPandas()"
 				],
-				"execution_count": 187
+				"execution_count": 212
 			},
 			{
 				"cell_type": "code",
@@ -73,7 +73,7 @@
 				"source": [
 					"df.groupBy(df['SexoVitima']).count().orderBy(df['SexoVitima']).toPandas()"
 				],
-				"execution_count": 188
+				"execution_count": 213
 			},
 			{
 				"cell_type": "code",
@@ -93,9 +93,10 @@
 					"#df.select('CenarioViolacao','Agravantes','AgravantesPoliciais','RelacaoVitimaSuspeito').distinct().toPandas()\r\n",
 					"#df.select('CenarioViolacao').distinct().toPandas()\r\n",
 					"\r\n",
-					"display(df.select('CenarioViolacao','Agravantes','AgravantesPoliciais','RelacaoVitimaSuspeito','SexoVitima','IdadeVitima','EscolaridadeVitima','RacaVitima').where((df['SexoVitima'] != 'Feminino') & (df['SexoVitima'] != 'Masculino') & (df['SexoVitima'] != 'Lgbt')))"
+					"df.where(df['SexoVitima'] != 'Feminino').toPandas()\r\n",
+					"#df.select('CenarioViolacao','Agravantes','AgravantesPoliciais','RelacaoVitimaSuspeito','SexoVitima','IdadeVitima','EscolaridadeVitima','RacaVitima').where(df['SexoVitima'] != 'Feminino').toPandas()"
 				],
-				"execution_count": 184
+				"execution_count": 211
 			},
 			{
 				"cell_type": "code",
