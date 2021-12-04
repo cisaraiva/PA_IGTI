@@ -17,7 +17,7 @@
 				"spark.dynamicAllocation.enabled": "false",
 				"spark.dynamicAllocation.minExecutors": "2",
 				"spark.dynamicAllocation.maxExecutors": "2",
-				"spark.autotune.trackingId": "21c2d68c-cc74-47c5-9441-f11c97ae1cfe"
+				"spark.autotune.trackingId": "3ac8aa02-68db-4eed-b700-de62e0034dd1"
 			}
 		},
 		"metadata": {
@@ -259,7 +259,7 @@
 				"source": [
 					"df.limit(3).toPandas()"
 				],
-				"execution_count": null
+				"execution_count": 209
 			},
 			{
 				"cell_type": "code",
@@ -278,7 +278,7 @@
 					"df = spark.read.parquet('/history_zone/2020/PrimeiroSemestre/')\r\n",
 					"df.limit(3).toPandas()"
 				],
-				"execution_count": null
+				"execution_count": 210
 			}
 		]
 	}
