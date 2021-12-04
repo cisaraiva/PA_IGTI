@@ -17,7 +17,7 @@
 				"spark.dynamicAllocation.enabled": "false",
 				"spark.dynamicAllocation.minExecutors": "2",
 				"spark.dynamicAllocation.maxExecutors": "2",
-				"spark.autotune.trackingId": "939dbe9f-ca1c-4e62-99da-e9f6b2441410"
+				"spark.autotune.trackingId": "e1e76980-16ed-48b8-87d6-acb70330b77c"
 			}
 		},
 		"metadata": {
@@ -65,7 +65,7 @@
 					"import pandas\r\n",
 					"import pyspark.sql.functions as F"
 				],
-				"execution_count": 108
+				"execution_count": 122
 			},
 			{
 				"cell_type": "code",
@@ -92,7 +92,7 @@
 					")\r\n",
 					"display(df.limit(10))"
 				],
-				"execution_count": 109
+				"execution_count": 123
 			},
 			{
 				"cell_type": "code",
@@ -108,9 +108,9 @@
 					}
 				},
 				"source": [
-					"df.filter(df._c0.like('%\"%')).collect()"
+					"#df.filter(df._c0.like('%\"%')).collect()"
 				],
-				"execution_count": 110
+				"execution_count": 124
 			},
 			{
 				"cell_type": "code",
@@ -127,9 +127,9 @@
 					"collapsed": false
 				},
 				"source": [
-					"display(df.limit(100))"
+					"display(df.limit(3))"
 				],
-				"execution_count": 111
+				"execution_count": 125
 			},
 			{
 				"cell_type": "code",
@@ -149,12 +149,18 @@
 					"\r\n",
 					"df = df.withColumn('_c0', regexp_replace('_c0', '\"', ''))\r\n",
 					"df = df.withColumn('_c0', regexp_replace('_c0', 'AGRESSOR CÔNJUGE;CONVIVENTE;ASCENDENTE;DESCENDENTE OU PARENTE', \"AGRESSOR CÔNJUGE,CONVIVENTE,ASCENDENTE,DESCENDENTE OU PARENTE\"))\r\n",
-					"\r\n",
 					"df = df.withColumn('_c0', regexp_replace('_c0', 'BAR;LANCHONETE;RESTAURANTE', \"BAR,LANCHONETE,RESTAURANTE\"))\r\n",
+					"df = df.withColumn('_c0', regexp_replace('_c0', 'MOTIVO VIL;TORPE;INSIDIOSO;CRUEL;À TRAIÇÃO;OU POR DINHEIRO', \"MOTIVO VIL,TORPE,INSIDIOSO,CRUEL,À TRAIÇÃO,OU POR DINHEIRO\"))\r\n",
+					"df = df.withColumn('_c0', regexp_replace('_c0', 'VÍTIMA IDOSA;CRIANÇA;DEFICIENTE OU MINORIA ÉTNICA OU SOCIAL', \"VÍTIMA IDOSA,CRIANÇA,DEFICIENTE OU MINORIA ÉTNICA OU SOCIAL\"))\r\n",
+					"df = df.withColumn('_c0', regexp_replace('_c0', 'AGRESSOR POLICIAL/MILITAR;POLICIAL CIVIL', \"AGRESSOR POLICIAL/MILITAR,POLICIAL CIVIL\"))\r\n",
+					"df = df.withColumn('_c0', regexp_replace('_c0', 'AGRESSOR POLICIAL/MILITAR;POLICIAL MILITAR', \"AGRESSOR POLICIAL/MILITAR,POLICIAL MILITAR\"))\r\n",
+					"df = df.withColumn('_c0', regexp_replace('_c0', 'VÍTIMA IDOSA;CRIANÇA;DEFICIENTE OU MINORIA ÉTNICA OU SOCIAL', \"VÍTIMA IDOSA,CRIANÇA,DEFICIENTE OU MINORIA ÉTNICA OU SOCIAL\"))\r\n",
+					"\r\n",
+					"#;Forças Armadas;\r\n",
 					"\r\n",
 					""
 				],
-				"execution_count": 112
+				"execution_count": 126
 			},
 			{
 				"cell_type": "code",
@@ -172,7 +178,7 @@
 				"source": [
 					"#df.collect()"
 				],
-				"execution_count": 113
+				"execution_count": 127
 			},
 			{
 				"cell_type": "code",
@@ -190,7 +196,7 @@
 				"source": [
 					"df.write.mode(\"overwrite\").csv(\"/landing_zone/2020/primeiro_semestre_2020_1.csv\", encoding='ISO-8859-1')"
 				],
-				"execution_count": 114
+				"execution_count": 128
 			}
 		]
 	}
