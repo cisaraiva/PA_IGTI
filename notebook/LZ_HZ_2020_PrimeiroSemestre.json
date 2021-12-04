@@ -17,7 +17,7 @@
 				"spark.dynamicAllocation.enabled": "false",
 				"spark.dynamicAllocation.minExecutors": "2",
 				"spark.dynamicAllocation.maxExecutors": "2",
-				"spark.autotune.trackingId": "aa7fb6bc-87ac-4adb-90b8-5e18c65cf5a7"
+				"spark.autotune.trackingId": "a2e9a547-3d66-4930-af7e-5bad485a8360"
 			}
 		},
 		"metadata": {
@@ -66,7 +66,7 @@
 					"from pyspark.sql import functions as f\r\n",
 					"import pandas as pd"
 				],
-				"execution_count": 121
+				"execution_count": 159
 			},
 			{
 				"cell_type": "code",
@@ -108,7 +108,7 @@
 					"    StructField(\"DeficienciaSuspeito\", StringType(), True)\r\n",
 					"])"
 				],
-				"execution_count": 122
+				"execution_count": 160
 			},
 			{
 				"cell_type": "code",
@@ -127,10 +127,10 @@
 					"# Ler arquivo de origem da landing zone\r\n",
 					"df = spark.read.format(\"csv\") \\\r\n",
 					"            .schema(schema) \\\r\n",
-					"            .options(quote=',', sep=';', encoding='ISO-8859-1') \\\r\n",
+					"            .options(quote='\"', sep=';', encoding='ISO-8859-1') \\\r\n",
 					"            .load('/landing_zone/2020/primeiro_semestre_2020_1.csv')"
 				],
-				"execution_count": 123
+				"execution_count": 161
 			},
 			{
 				"cell_type": "code",
@@ -148,7 +148,7 @@
 				"source": [
 					"df = df.where((df['GrupoVulneravel'] == '1-Violência Contra a Mulher') | (df['GrupoVulneravel'] == '2-Violência Doméstica e Familiar Contra a Mulher'))"
 				],
-				"execution_count": 124
+				"execution_count": 162
 			},
 			{
 				"cell_type": "code",
@@ -168,7 +168,7 @@
 					"df = df.where((df[0].isNotNull()) \\\r\n",
 					"                & (df[0] != 'Ano'))"
 				],
-				"execution_count": 125
+				"execution_count": 163
 			},
 			{
 				"cell_type": "code",
@@ -196,11 +196,12 @@
 					"    if name == 'UF':\r\n",
 					"        continue\r\n",
 					"    df = df.withColumn(name, f.initcap(f.col(name)))\r\n",
+					"    df = df.withColumn(name, f.trim(f.col(name)))\r\n",
 					"    #df = df.withColumn(name,f.regexp_replace(name,',',''))\r\n",
 					"    #df = df.withColumn(name, df[name].cast(IntegerType()))\r\n",
 					""
 				],
-				"execution_count": 126
+				"execution_count": 164
 			},
 			{
 				"cell_type": "code",
@@ -218,7 +219,7 @@
 				"source": [
 					"df.limit(3).toPandas()"
 				],
-				"execution_count": 127
+				"execution_count": 165
 			},
 			{
 				"cell_type": "code",
@@ -240,7 +241,7 @@
 					"df.write.partitionBy(\"Ano\",\"Mes\").mode(\"overwrite\").parquet(\"/history_zone/2020/PrimeiroSemestre/\")\r\n",
 					""
 				],
-				"execution_count": 128
+				"execution_count": 166
 			},
 			{
 				"cell_type": "code",
@@ -258,7 +259,7 @@
 				"source": [
 					"df.limit(3).toPandas()"
 				],
-				"execution_count": 129
+				"execution_count": 167
 			},
 			{
 				"cell_type": "code",
@@ -277,7 +278,7 @@
 					"df = spark.read.parquet('/history_zone/2020/PrimeiroSemestre/')\r\n",
 					"df.limit(3).toPandas()"
 				],
-				"execution_count": 130
+				"execution_count": 168
 			}
 		]
 	}
