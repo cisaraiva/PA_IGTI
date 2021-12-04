@@ -17,7 +17,7 @@
 				"spark.dynamicAllocation.enabled": "false",
 				"spark.dynamicAllocation.minExecutors": "2",
 				"spark.dynamicAllocation.maxExecutors": "2",
-				"spark.autotune.trackingId": "7234aa7c-1ccd-45d8-bd82-178dea32f631"
+				"spark.autotune.trackingId": "3ee8b331-ef65-48f0-a9fb-7ca9d30392d0"
 			}
 		},
 		"metadata": {
@@ -52,282 +52,9 @@
 				"cell_type": "code",
 				"source": [
 					"df = spark.read.parquet('/history_zone/2020/PrimeiroSemestre/')\r\n",
-					"df.select('EscolaridadeVitima','IdadeSuspeito','IdadeVitima','RacaSuspeito','RacaVitima','RelacaoVitimaSuspeito', 'TipoViolacao').toPandas()"
+					"#df.select('EscolaridadeVitima','IdadeSuspeito','IdadeVitima','RacaSuspeito','RacaVitima','RelacaoVitimaSuspeito', 'TipoViolacao').toPandas()"
 				],
-				"execution_count": 82
-			},
-			{
-				"cell_type": "code",
-				"metadata": {
-					"jupyter": {
-						"source_hidden": false,
-						"outputs_hidden": false
-					},
-					"nteract": {
-						"transient": {
-							"deleting": false
-						}
-					}
-				},
-				"source": [
-					"df.limit(3).toPandas()"
-				],
-				"execution_count": 70
-			},
-			{
-				"cell_type": "code",
-				"metadata": {
-					"jupyter": {
-						"source_hidden": false,
-						"outputs_hidden": false
-					},
-					"nteract": {
-						"transient": {
-							"deleting": false
-						}
-					}
-				},
-				"source": [
-					"df.select('IdadeSuspeito').distinct().toPandas()"
-				],
-				"execution_count": 71
-			},
-			{
-				"cell_type": "code",
-				"metadata": {
-					"jupyter": {
-						"source_hidden": false,
-						"outputs_hidden": false
-					},
-					"nteract": {
-						"transient": {
-							"deleting": false
-						}
-					}
-				},
-				"source": [
-					"df.select('IdadeVitima').distinct().toPandas()"
-				],
-				"execution_count": 72
-			},
-			{
-				"cell_type": "code",
-				"metadata": {
-					"jupyter": {
-						"source_hidden": false,
-						"outputs_hidden": false
-					},
-					"nteract": {
-						"transient": {
-							"deleting": false
-						}
-					}
-				},
-				"source": [
-					"df.select('RacaSuspeito').distinct().toPandas()"
-				],
-				"execution_count": 73
-			},
-			{
-				"cell_type": "code",
-				"metadata": {
-					"jupyter": {
-						"source_hidden": false,
-						"outputs_hidden": false
-					},
-					"nteract": {
-						"transient": {
-							"deleting": false
-						}
-					}
-				},
-				"source": [
-					"df.select('RacaVitima').distinct().toPandas()"
-				],
-				"execution_count": 74
-			},
-			{
-				"cell_type": "code",
-				"metadata": {
-					"jupyter": {
-						"source_hidden": false,
-						"outputs_hidden": false
-					},
-					"nteract": {
-						"transient": {
-							"deleting": false
-						}
-					}
-				},
-				"source": [
-					"df.select('RelacaoVitimaSuspeito').distinct().toPandas()"
-				],
-				"execution_count": 75
-			},
-			{
-				"cell_type": "code",
-				"metadata": {
-					"jupyter": {
-						"source_hidden": false,
-						"outputs_hidden": false
-					},
-					"nteract": {
-						"transient": {
-							"deleting": false
-						}
-					}
-				},
-				"source": [
-					"df.select('EscolaridadeVitima').distinct().collect()\r\n",
-					"#df.select('TipoViolacao').distinct().toPandas()\r\n",
-					""
-				],
-				"execution_count": 76
-			},
-			{
-				"cell_type": "code",
-				"metadata": {
-					"jupyter": {
-						"source_hidden": false,
-						"outputs_hidden": false
-					},
-					"nteract": {
-						"transient": {
-							"deleting": false
-						}
-					}
-				},
-				"source": [
-					"df.select('GrupoVulneravel').distinct().toPandas()\r\n",
-					"df.select('GrupoVulneravel').distinct().collect()"
-				],
-				"execution_count": 77
-			},
-			{
-				"cell_type": "code",
-				"metadata": {
-					"jupyter": {
-						"source_hidden": false,
-						"outputs_hidden": false
-					},
-					"nteract": {
-						"transient": {
-							"deleting": false
-						}
-					}
-				},
-				"source": [
-					"df.select('EspecieViolacao').distinct().toPandas()"
-				],
-				"execution_count": 78
-			},
-			{
-				"cell_type": "code",
-				"metadata": {
-					"jupyter": {
-						"source_hidden": false,
-						"outputs_hidden": false
-					},
-					"nteract": {
-						"transient": {
-							"deleting": false
-						}
-					}
-				},
-				"source": [
-					"df.select('CanalAtendimento').distinct().toPandas()"
-				],
-				"execution_count": 79
-			},
-			{
-				"cell_type": "code",
-				"metadata": {
-					"jupyter": {
-						"source_hidden": false,
-						"outputs_hidden": false
-					},
-					"nteract": {
-						"transient": {
-							"deleting": false
-						}
-					}
-				},
-				"source": [
-					"df.select('c').distinct().toPandas()"
-				],
-				"execution_count": 80
-			},
-			{
-				"cell_type": "code",
-				"metadata": {
-					"jupyter": {
-						"source_hidden": false,
-						"outputs_hidden": false
-					},
-					"nteract": {
-						"transient": {
-							"deleting": false
-						}
-					}
-				},
-				"source": [
-					"df.select('Denunciante').distinct().toPandas()"
-				],
-				"execution_count": null
-			},
-			{
-				"cell_type": "code",
-				"metadata": {
-					"jupyter": {
-						"source_hidden": false,
-						"outputs_hidden": false
-					},
-					"nteract": {
-						"transient": {
-							"deleting": false
-						}
-					}
-				},
-				"source": [
-					"df.select('Motivacao').distinct().toPandas()"
-				],
-				"execution_count": null
-			},
-			{
-				"cell_type": "code",
-				"metadata": {
-					"jupyter": {
-						"source_hidden": false,
-						"outputs_hidden": false
-					},
-					"nteract": {
-						"transient": {
-							"deleting": false
-						}
-					}
-				},
-				"source": [
-					"df.select('RelacaoVitimaSuspeito').distinct().toPandas()"
-				],
-				"execution_count": null
-			},
-			{
-				"cell_type": "code",
-				"metadata": {
-					"jupyter": {
-						"source_hidden": false,
-						"outputs_hidden": false
-					},
-					"nteract": {
-						"transient": {
-							"deleting": false
-						}
-					}
-				},
-				"source": [
-					"df.select('SexoVitima').distinct().toPandas()"
-				],
-				"execution_count": null
+				"execution_count": 57
 			},
 			{
 				"cell_type": "code",
@@ -346,6 +73,24 @@
 					"df.printSchema()"
 				],
 				"execution_count": null
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"df.groupBy(df[0]).count().toPandas().truncate(False)"
+				],
+				"execution_count": 60
 			}
 		]
 	}
