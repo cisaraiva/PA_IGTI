@@ -17,7 +17,7 @@
 				"spark.dynamicAllocation.enabled": "false",
 				"spark.dynamicAllocation.minExecutors": "2",
 				"spark.dynamicAllocation.maxExecutors": "2",
-				"spark.autotune.trackingId": "8df0a33c-3829-4cb2-853c-808f85e8be29"
+				"spark.autotune.trackingId": "6804cf5f-34d3-46a0-bd66-c129d1481c0d"
 			}
 		},
 		"metadata": {
@@ -50,18 +50,22 @@
 		"cells": [
 			{
 				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
 				"source": [
-					"from csv import reader\r\n",
-					"# open file in read mode\r\n",
-					"with open('students.csv', 'r') as read_obj:\r\n",
-					"    # pass the file object to reader() to get the reader object\r\n",
-					"    csv_reader = reader(read_obj)\r\n",
-					"    # Iterate over each row in the csv using reader object\r\n",
-					"    for row in csv_reader:\r\n",
-					"        # row variable is a list that represents a row in csv\r\n",
-					"        print(row)"
+					"import pandas\r\n",
+					"import pyspark.sql.functions as F"
 				],
-				"execution_count": null
+				"execution_count": 42
 			},
 			{
 				"cell_type": "code",
@@ -88,7 +92,48 @@
 					")\r\n",
 					"display(df.limit(10))"
 				],
-				"execution_count": 2
+				"execution_count": 43
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"from pyspark.sql.functions import *\r\n",
+					"\r\n",
+					"df = df.withColumn('_c0', regexp_replace('_c0', '\"\"\"', ''''''))\r\n",
+					"df = df.withColumn('_c0', regexp_replace('_c0', '\"', ''''''))\r\n",
+					"\r\n",
+					"#df['_c0'] = df['_c0'].str.replace('N/D',None)"
+				],
+				"execution_count": 44
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"df.write.mode(\"overwrite\").csv(\"/landing_zone/2020/primeiro_semestre_2020_1.csv\", encoding='ISO-8859-1')"
+				],
+				"execution_count": 47
 			}
 		]
 	}
