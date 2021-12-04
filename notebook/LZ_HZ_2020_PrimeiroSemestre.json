@@ -17,7 +17,7 @@
 				"spark.dynamicAllocation.enabled": "false",
 				"spark.dynamicAllocation.minExecutors": "2",
 				"spark.dynamicAllocation.maxExecutors": "2",
-				"spark.autotune.trackingId": "ad50f001-e424-4b13-ac17-36e56b852d04"
+				"spark.autotune.trackingId": "aa7fb6bc-87ac-4adb-90b8-5e18c65cf5a7"
 			}
 		},
 		"metadata": {
@@ -66,7 +66,7 @@
 					"from pyspark.sql import functions as f\r\n",
 					"import pandas as pd"
 				],
-				"execution_count": 111
+				"execution_count": 121
 			},
 			{
 				"cell_type": "code",
@@ -108,7 +108,7 @@
 					"    StructField(\"DeficienciaSuspeito\", StringType(), True)\r\n",
 					"])"
 				],
-				"execution_count": 112
+				"execution_count": 122
 			},
 			{
 				"cell_type": "code",
@@ -127,10 +127,10 @@
 					"# Ler arquivo de origem da landing zone\r\n",
 					"df = spark.read.format(\"csv\") \\\r\n",
 					"            .schema(schema) \\\r\n",
-					"            .options(quote='''''', sep=';', encoding='ISO-8859-1') \\\r\n",
+					"            .options(quote=',', sep=';', encoding='ISO-8859-1') \\\r\n",
 					"            .load('/landing_zone/2020/primeiro_semestre_2020_1.csv')"
 				],
-				"execution_count": 113
+				"execution_count": 123
 			},
 			{
 				"cell_type": "code",
@@ -148,7 +148,7 @@
 				"source": [
 					"df = df.where((df['GrupoVulneravel'] == '1-Violência Contra a Mulher') | (df['GrupoVulneravel'] == '2-Violência Doméstica e Familiar Contra a Mulher'))"
 				],
-				"execution_count": 114
+				"execution_count": 124
 			},
 			{
 				"cell_type": "code",
@@ -168,7 +168,7 @@
 					"df = df.where((df[0].isNotNull()) \\\r\n",
 					"                & (df[0] != 'Ano'))"
 				],
-				"execution_count": 115
+				"execution_count": 125
 			},
 			{
 				"cell_type": "code",
@@ -200,7 +200,7 @@
 					"    #df = df.withColumn(name, df[name].cast(IntegerType()))\r\n",
 					""
 				],
-				"execution_count": 116
+				"execution_count": 126
 			},
 			{
 				"cell_type": "code",
@@ -218,7 +218,7 @@
 				"source": [
 					"df.limit(3).toPandas()"
 				],
-				"execution_count": 117
+				"execution_count": 127
 			},
 			{
 				"cell_type": "code",
@@ -240,7 +240,7 @@
 					"df.write.partitionBy(\"Ano\",\"Mes\").mode(\"overwrite\").parquet(\"/history_zone/2020/PrimeiroSemestre/\")\r\n",
 					""
 				],
-				"execution_count": 118
+				"execution_count": 128
 			},
 			{
 				"cell_type": "code",
@@ -258,7 +258,7 @@
 				"source": [
 					"df.limit(3).toPandas()"
 				],
-				"execution_count": 119
+				"execution_count": 129
 			},
 			{
 				"cell_type": "code",
@@ -277,7 +277,7 @@
 					"df = spark.read.parquet('/history_zone/2020/PrimeiroSemestre/')\r\n",
 					"df.limit(3).toPandas()"
 				],
-				"execution_count": 120
+				"execution_count": 130
 			}
 		]
 	}
