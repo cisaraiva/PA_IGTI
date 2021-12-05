@@ -17,7 +17,7 @@
 				"spark.dynamicAllocation.enabled": "false",
 				"spark.dynamicAllocation.minExecutors": "2",
 				"spark.dynamicAllocation.maxExecutors": "2",
-				"spark.autotune.trackingId": "9fa8b13c-9fec-461b-9b1c-c582c25a0641"
+				"spark.autotune.trackingId": "ec73c26d-359a-4541-9fb8-aa8a1ea35766"
 			}
 		},
 		"metadata": {
@@ -66,7 +66,7 @@
 					"from pyspark.sql import functions as f\r\n",
 					"import pandas as pd"
 				],
-				"execution_count": 251
+				"execution_count": 269
 			},
 			{
 				"cell_type": "code",
@@ -108,7 +108,7 @@
 					"    StructField(\"DeficienciaSuspeito\", StringType(), True)\r\n",
 					"])"
 				],
-				"execution_count": 252
+				"execution_count": 270
 			},
 			{
 				"cell_type": "code",
@@ -130,7 +130,29 @@
 					"            .options(quote='\"', sep=';', encoding='ISO-8859-1') \\\r\n",
 					"            .load('/landing_zone/2020/primeiro_semestre_2020_1.csv')"
 				],
-				"execution_count": 253
+				"execution_count": 271
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"# Remover colunas e linhas sem valor para o data lake\r\n",
+					"df = df.where((df['GrupoVulneravel'] == '1-Violência Contra a Mulher') | (df['GrupoVulneravel'] == '2-Violência Doméstica e Familiar Contra a Mulher'))\r\n",
+					"\r\n",
+					"df = df.where((df[0].isNotNull()) \\\r\n",
+					"                & (df[0] != 'Ano'))"
+				],
+				"execution_count": 272
 			},
 			{
 				"cell_type": "code",
@@ -161,29 +183,7 @@
 					"    df = df.withColumn(name, f.trim(f.col(name)))\r\n",
 					""
 				],
-				"execution_count": 254
-			},
-			{
-				"cell_type": "code",
-				"metadata": {
-					"jupyter": {
-						"source_hidden": false,
-						"outputs_hidden": false
-					},
-					"nteract": {
-						"transient": {
-							"deleting": false
-						}
-					}
-				},
-				"source": [
-					"# Remover colunas e linhas sem valor para o data lake\r\n",
-					"df = df.where((df['GrupoVulneravel'] == '1-Violência Contra a Mulher') | (df['GrupoVulneravel'] == '2-Violência Doméstica e Familiar Contra a Mulher'))\r\n",
-					"\r\n",
-					"df = df.where((df[0].isNotNull()) \\\r\n",
-					"                & (df[0] != 'Ano'))"
-				],
-				"execution_count": 255
+				"execution_count": 273
 			},
 			{
 				"cell_type": "code",
@@ -201,7 +201,7 @@
 				"source": [
 					"df = df.where(df['SexoVitima'] == 'Feminino')"
 				],
-				"execution_count": 256
+				"execution_count": 274
 			},
 			{
 				"cell_type": "code",
@@ -219,7 +219,7 @@
 				"source": [
 					"df.limit(3).toPandas()"
 				],
-				"execution_count": 257
+				"execution_count": 275
 			},
 			{
 				"cell_type": "code",
@@ -241,7 +241,7 @@
 					"df.write.partitionBy(\"Ano\",\"Mes\").mode(\"overwrite\").parquet(\"/history_zone/2020/PrimeiroSemestre/\")\r\n",
 					""
 				],
-				"execution_count": 258
+				"execution_count": 276
 			},
 			{
 				"cell_type": "code",
@@ -259,7 +259,7 @@
 				"source": [
 					"df.limit(3).toPandas()"
 				],
-				"execution_count": 259
+				"execution_count": 277
 			},
 			{
 				"cell_type": "code",
@@ -278,7 +278,7 @@
 					"df = spark.read.parquet('/history_zone/2020/PrimeiroSemestre/')\r\n",
 					"df.limit(3).toPandas()"
 				],
-				"execution_count": 260
+				"execution_count": 278
 			}
 		]
 	}
