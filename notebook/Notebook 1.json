@@ -17,7 +17,7 @@
 				"spark.dynamicAllocation.enabled": "false",
 				"spark.dynamicAllocation.minExecutors": "2",
 				"spark.dynamicAllocation.maxExecutors": "2",
-				"spark.autotune.trackingId": "b38787dd-d734-4459-8f45-97c34548f953"
+				"spark.autotune.trackingId": "285652d8-1deb-48d2-a6ea-1b0bf3f723fc"
 			}
 		},
 		"metadata": {
@@ -67,7 +67,7 @@
 					"import pandas as pd\r\n",
 					"import re"
 				],
-				"execution_count": 289
+				"execution_count": 307
 			},
 			{
 				"cell_type": "code",
@@ -76,7 +76,7 @@
 					"#df = df.where(df[11] != 'Bar')\r\n",
 					"#df.select('EscolaridadeVitima','IdadeSuspeito','IdadeVitima','RacaSuspeito','RacaVitima','RelacaoVitimaSuspeito', 'TipoViolacao').toPandas()"
 				],
-				"execution_count": 281
+				"execution_count": 312
 			},
 			{
 				"cell_type": "code",
@@ -93,75 +93,9 @@
 				},
 				"source": [
 					"#df.groupBy(df['SexoVitima']).count().orderBy(df['SexoVitima'])\r\n",
-					"df.groupBy(df['IdadeVitima']).count().orderBy(df['IdadeVitima']).toPandas()"
+					"df.groupBy(df['IdadeVitima']).count().toPandas()"
 				],
-				"execution_count": 283
-			},
-			{
-				"cell_type": "code",
-				"metadata": {
-					"jupyter": {
-						"source_hidden": false,
-						"outputs_hidden": false
-					},
-					"nteract": {
-						"transient": {
-							"deleting": false
-						}
-					}
-				},
-				"source": [
-					"\r\n",
-					"#df['IdadeVitima'] = df['IdadeVitima'].map(lambda x: ''.join([i for i in x if i.isdigit()]))\r\n",
-					"\r\n",
-					"#df['IdadeVitima'] = df['IdadeVitima'].str.replace(r'\\D', '')\r\n",
-					"\r\n",
-					"#df['IdadeVitima'] = [x.lstrip('+-').rstrip('aAbBcC') for x in df['IdadeVitima']]\r\n",
-					"for x in df['IdadeVitima']:\r\n",
-					"    x.map(lambda x: ''.join([i for i in x if i.isdigit()]))\r\n",
-					"\r\n",
-					"\r\n",
-					""
-				],
-				"execution_count": 302
-			},
-			{
-				"cell_type": "code",
-				"metadata": {
-					"jupyter": {
-						"source_hidden": false,
-						"outputs_hidden": false
-					},
-					"nteract": {
-						"transient": {
-							"deleting": false
-						}
-					}
-				},
-				"source": [
-					"df.select(f.regexp_replace(f.col(\"IdadeVitima\"), \"^\\s+$\", \"\")).toPandas()"
-				],
-				"execution_count": 306
-			},
-			{
-				"cell_type": "code",
-				"metadata": {
-					"jupyter": {
-						"source_hidden": false,
-						"outputs_hidden": false
-					},
-					"nteract": {
-						"transient": {
-							"deleting": false
-						}
-					},
-					"collapsed": false
-				},
-				"source": [
-					"display(df.where(f.col(\"IdadeVitima\").isNull()))\r\n",
-					"#(df[0].isNotNull())"
-				],
-				"execution_count": 284
+				"execution_count": 315
 			},
 			{
 				"cell_type": "code",
@@ -178,25 +112,6 @@
 				},
 				"source": [
 					"df.count()"
-				],
-				"execution_count": null
-			},
-			{
-				"cell_type": "code",
-				"metadata": {
-					"jupyter": {
-						"source_hidden": false,
-						"outputs_hidden": false
-					},
-					"nteract": {
-						"transient": {
-							"deleting": false
-						}
-					}
-				},
-				"source": [
-					"df.where(df['CenarioViolacao'] != 'Bar').toPandas()\r\n",
-					"#df.where(df[1] == 27).toPandas()"
 				],
 				"execution_count": null
 			}
