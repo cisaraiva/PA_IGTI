@@ -17,7 +17,7 @@
 				"spark.dynamicAllocation.enabled": "false",
 				"spark.dynamicAllocation.minExecutors": "2",
 				"spark.dynamicAllocation.maxExecutors": "2",
-				"spark.autotune.trackingId": "67923cea-48e2-4b00-a9a3-9d61ad5b40a8"
+				"spark.autotune.trackingId": "bac4db60-82b3-4bd4-b0a1-7d04d11b200c"
 			}
 		},
 		"metadata": {
@@ -66,7 +66,7 @@
 					"from pyspark.sql import functions as f, column\r\n",
 					"import pandas as pd"
 				],
-				"execution_count": 6
+				"execution_count": 19
 			},
 			{
 				"cell_type": "code",
@@ -75,7 +75,7 @@
 					"#df = df.where(df[11] != 'Bar')\r\n",
 					"#df.select('EscolaridadeVitima','IdadeSuspeito','IdadeVitima','RacaSuspeito','RacaVitima','RelacaoVitimaSuspeito', 'TipoViolacao').toPandas()"
 				],
-				"execution_count": 7
+				"execution_count": 20
 			},
 			{
 				"cell_type": "code",
@@ -112,7 +112,7 @@
 					"#df.groupBy(df['SexoVitima']).count().orderBy(df['SexoVitima'])\r\n",
 					"df.groupBy(df['Motivacao']).count().orderBy('Motivacao').toPandas()"
 				],
-				"execution_count": 17
+				"execution_count": null
 			},
 			{
 				"cell_type": "code",
@@ -130,7 +130,7 @@
 				"source": [
 					"df.count()"
 				],
-				"execution_count": 4
+				"execution_count": null
 			},
 			{
 				"cell_type": "code",
@@ -148,7 +148,7 @@
 				"source": [
 					"df.toPandas()"
 				],
-				"execution_count": 5
+				"execution_count": null
 			}
 		]
 	}
