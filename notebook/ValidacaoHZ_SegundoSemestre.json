@@ -17,7 +17,7 @@
 				"spark.dynamicAllocation.enabled": "false",
 				"spark.dynamicAllocation.minExecutors": "2",
 				"spark.dynamicAllocation.maxExecutors": "2",
-				"spark.autotune.trackingId": "bac4db60-82b3-4bd4-b0a1-7d04d11b200c"
+				"spark.autotune.trackingId": "ef51d657-1edb-463a-b535-f1b6eadd10ea"
 			}
 		},
 		"metadata": {
@@ -93,7 +93,7 @@
 				"source": [
 					"df.printSchema()"
 				],
-				"execution_count": null
+				"execution_count": 21
 			},
 			{
 				"cell_type": "code",
@@ -112,7 +112,7 @@
 					"#df.groupBy(df['SexoVitima']).count().orderBy(df['SexoVitima'])\r\n",
 					"df.groupBy(df['Motivacao']).count().orderBy('Motivacao').toPandas()"
 				],
-				"execution_count": null
+				"execution_count": 22
 			},
 			{
 				"cell_type": "code",
@@ -130,7 +130,7 @@
 				"source": [
 					"df.count()"
 				],
-				"execution_count": null
+				"execution_count": 23
 			},
 			{
 				"cell_type": "code",
@@ -148,7 +148,7 @@
 				"source": [
 					"df.toPandas()"
 				],
-				"execution_count": null
+				"execution_count": 24
 			}
 		]
 	}

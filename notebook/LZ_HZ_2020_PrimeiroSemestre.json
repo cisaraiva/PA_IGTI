@@ -17,7 +17,7 @@
 				"spark.dynamicAllocation.enabled": "false",
 				"spark.dynamicAllocation.minExecutors": "2",
 				"spark.dynamicAllocation.maxExecutors": "2",
-				"spark.autotune.trackingId": "a5f3399d-878b-4acb-9dd9-6a8b37531137"
+				"spark.autotune.trackingId": "030d086e-5c09-4b20-872b-42a29a5474da"
 			}
 		},
 		"metadata": {
@@ -146,11 +146,8 @@
 					}
 				},
 				"source": [
-					"# Remover colunas e linhas sem valor para o data lake\r\n",
-					"df = df.where((df['GrupoVulneravel'] == '1-Violência Contra a Mulher') | (df['GrupoVulneravel'] == '2-Violência Doméstica e Familiar Contra a Mulher'))\r\n",
-					"\r\n",
-					"df = df.where((df[0].isNotNull()) \\\r\n",
-					"                & (df[0] != 'Ano'))"
+					"# Remover linhas nulas e header\r\n",
+					"df = df.where((df[0].isNotNull()) & (df[0] != 'Ano'))"
 				],
 				"execution_count": 381
 			},
@@ -169,12 +166,6 @@
 				},
 				"source": [
 					"# Capitalizar todos os textos e incluir 0 onde há nulos\r\n",
-					"df = df.na.replace('N/D', None)\r\n",
-					"\r\n",
-					"df = df.fillna(0)\r\n",
-					"\r\n",
-					"#df = df.withColumn('UF', f.upper(f.col('UF')))\r\n",
-					"\r\n",
 					"names = df.schema.names\r\n",
 					"for name in names:\r\n",
 					"    if name == 'UF':\r\n",
@@ -182,12 +173,9 @@
 					"    df = df.withColumn(name, f.initcap(f.col(name)))\r\n",
 					"    df = df.withColumn(name, f.trim(f.col(name)))\r\n",
 					"\r\n",
-					"df = df.where(df['SexoVitima'] == 'Feminino')\r\n",
+					"df = df.na.replace('N/D', None)\r\n",
 					"\r\n",
-					"#df = df.withColumn(\"IdadeVitima\", f.regexp_replace(f.col(\"IdadeVitima\"), \"[a-Z][\\+$]\", \"\"))\r\n",
-					"df = df.withColumn(\"IdadeVitima\", f.regexp_replace(f.col(\"IdadeVitima\"), \"[^0-9]\", \"\"))\r\n",
-					"\r\n",
-					"df = df.withColumn(\"IdadeSuspeito\", f.regexp_replace(f.col(\"IdadeSuspeito\"), \"[^0-9]\", \"\"))"
+					"df = df.fillna(0)"
 				],
 				"execution_count": 382
 			},
@@ -205,7 +193,49 @@
 					}
 				},
 				"source": [
-					"#df = df.withColumn(\"IdadeVitima\", f.regexp_replace(f.col(\"IdadeVitima\"), \"[0-9]\", \"\"))"
+					"# filtrar apenas grupo vulneravel relativo a violência contra mulher\r\n",
+					"df = df.where((df['GrupoVulneravel'] == '1-Violência Contra a Mulher') | (df['GrupoVulneravel'] == '2-Violência Doméstica e Familiar Contra a Mulher'))"
+				],
+				"execution_count": null
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"#Filtrar apenas vitima do sexo feminino\r\n",
+					"df = df.where(df['SexoVitima'] == 'Feminino')"
+				],
+				"execution_count": null
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"# Limpar idades\r\n",
+					"#df = df.withColumn(\"IdadeVitima\", f.regexp_replace(f.col(\"IdadeVitima\"), \"[a-Z][\\+$]\", \"\"))\r\n",
+					"df = df.withColumn(\"IdadeVitima\", f.regexp_replace(f.col(\"IdadeVitima\"), \"[^0-9]\", \"\"))\r\n",
+					"\r\n",
+					"df = df.withColumn(\"IdadeSuspeito\", f.regexp_replace(f.col(\"IdadeSuspeito\"), \"[^0-9]\", \"\"))"
 				],
 				"execution_count": 383
 			},
@@ -223,47 +253,8 @@
 					}
 				},
 				"source": [
-					"df.groupBy(df['IdadeVitima']).count().orderBy('IdadeVitima').toPandas()"
-				],
-				"execution_count": 388
-			},
-			{
-				"cell_type": "code",
-				"metadata": {
-					"jupyter": {
-						"source_hidden": false,
-						"outputs_hidden": false
-					},
-					"nteract": {
-						"transient": {
-							"deleting": false
-						}
-					}
-				},
-				"source": [
-					"df.limit(3).toPandas()"
-				],
-				"execution_count": 385
-			},
-			{
-				"cell_type": "code",
-				"metadata": {
-					"jupyter": {
-						"source_hidden": false,
-						"outputs_hidden": false
-					},
-					"nteract": {
-						"transient": {
-							"deleting": false
-						}
-					}
-				},
-				"source": [
 					"# Escrever dados limpos em formato parque no azure storage\r\n",
-					"#df.write.format('parquet').mode('overwrite').save('/history_zone/2020/PrimeiroSemestre/')\r\n",
-					"\r\n",
-					"df.write.partitionBy(\"Ano\",\"Mes\").mode(\"overwrite\").parquet(\"/history_zone/2020/PrimeiroSemestre/\")\r\n",
-					""
+					"df.write.partitionBy(\"Ano\",\"Mes\").mode(\"overwrite\").parquet(\"/history_zone/2020/PrimeiroSemestre/\")"
 				],
 				"execution_count": 386
 			},
