@@ -17,7 +17,7 @@
 				"spark.dynamicAllocation.enabled": "false",
 				"spark.dynamicAllocation.minExecutors": "2",
 				"spark.dynamicAllocation.maxExecutors": "2",
-				"spark.autotune.trackingId": "ae819d83-7b94-495f-bfa9-568036d28451"
+				"spark.autotune.trackingId": "c815eeb0-321e-49fb-881c-d0dd63e07abc"
 			}
 		},
 		"metadata": {
@@ -65,7 +65,7 @@
 					"import pandas\r\n",
 					"import pyspark.sql.functions as F"
 				],
-				"execution_count": 136
+				"execution_count": 6
 			},
 			{
 				"cell_type": "code",
@@ -92,7 +92,7 @@
 					")\r\n",
 					"display(df.limit(10))"
 				],
-				"execution_count": 137
+				"execution_count": 7
 			},
 			{
 				"cell_type": "code",
@@ -111,6 +111,7 @@
 					"from pyspark.sql.functions import *\r\n",
 					"\r\n",
 					"df = df.withColumn('_c0', regexp_replace('_c0', '\"', ''))\r\n",
+					"df = df.withColumn('_c0', regexp_replace('_c0', '''''', ''))\r\n",
 					"df = df.withColumn('_c0', regexp_replace('_c0', 'AGRESSOR CÔNJUGE;CONVIVENTE;ASCENDENTE;DESCENDENTE OU PARENTE', \"AGRESSOR CÔNJUGE,CONVIVENTE,ASCENDENTE,DESCENDENTE OU PARENTE\"))\r\n",
 					"df = df.withColumn('_c0', regexp_replace('_c0', 'BAR;LANCHONETE;RESTAURANTE', \"BAR,LANCHONETE,RESTAURANTE\"))\r\n",
 					"df = df.withColumn('_c0', regexp_replace('_c0', 'MOTIVO VIL;TORPE;INSIDIOSO;CRUEL;À TRAIÇÃO;OU POR DINHEIRO', \"MOTIVO VIL,TORPE,INSIDIOSO,CRUEL,À TRAIÇÃO,OU POR DINHEIRO\"))\r\n",
@@ -120,7 +121,7 @@
 					"df = df.withColumn('_c0', regexp_replace('_c0', 'VÍTIMA IDOSA;CRIANÇA;DEFICIENTE OU MINORIA ÉTNICA OU SOCIAL', \"VÍTIMA IDOSA,CRIANÇA,DEFICIENTE OU MINORIA ÉTNICA OU SOCIAL\"))\r\n",
 					""
 				],
-				"execution_count": 140
+				"execution_count": 8
 			},
 			{
 				"cell_type": "code",
@@ -138,7 +139,7 @@
 				"source": [
 					"df.write.mode(\"overwrite\").csv(\"/landing_zone/2020/primeiro_semestre_2020_1.csv\", encoding='ISO-8859-1')"
 				],
-				"execution_count": 142
+				"execution_count": 9
 			}
 		]
 	}
