@@ -17,7 +17,7 @@
 				"spark.dynamicAllocation.enabled": "false",
 				"spark.dynamicAllocation.minExecutors": "2",
 				"spark.dynamicAllocation.maxExecutors": "2",
-				"spark.autotune.trackingId": "030d086e-5c09-4b20-872b-42a29a5474da"
+				"spark.autotune.trackingId": "c531baca-4a0c-4c77-87ab-927626bf19fe"
 			}
 		},
 		"metadata": {
@@ -66,7 +66,7 @@
 					"from pyspark.sql import functions as f\r\n",
 					"import pandas as pd"
 				],
-				"execution_count": 378
+				"execution_count": 11
 			},
 			{
 				"cell_type": "code",
@@ -108,7 +108,7 @@
 					"    StructField(\"DeficienciaSuspeito\", StringType(), True)\r\n",
 					"])"
 				],
-				"execution_count": 379
+				"execution_count": 12
 			},
 			{
 				"cell_type": "code",
@@ -130,7 +130,7 @@
 					"            .options(quote='\"', sep=';', encoding='ISO-8859-1') \\\r\n",
 					"            .load('/landing_zone/2020/primeiro_semestre_2020_1.csv')"
 				],
-				"execution_count": 380
+				"execution_count": null
 			},
 			{
 				"cell_type": "code",
@@ -149,7 +149,7 @@
 					"# Remover linhas nulas e header\r\n",
 					"df = df.where((df[0].isNotNull()) & (df[0] != 'Ano'))"
 				],
-				"execution_count": 381
+				"execution_count": 4
 			},
 			{
 				"cell_type": "code",
@@ -166,6 +166,8 @@
 				},
 				"source": [
 					"# Capitalizar todos os textos e incluir 0 onde há nulos\r\n",
+					"df = df.na.replace('N/D', None)\r\n",
+					"\r\n",
 					"names = df.schema.names\r\n",
 					"for name in names:\r\n",
 					"    if name == 'UF':\r\n",
@@ -173,11 +175,9 @@
 					"    df = df.withColumn(name, f.initcap(f.col(name)))\r\n",
 					"    df = df.withColumn(name, f.trim(f.col(name)))\r\n",
 					"\r\n",
-					"df = df.na.replace('N/D', None)\r\n",
-					"\r\n",
 					"df = df.fillna(0)"
 				],
-				"execution_count": 382
+				"execution_count": 5
 			},
 			{
 				"cell_type": "code",
@@ -196,7 +196,7 @@
 					"# filtrar apenas grupo vulneravel relativo a violência contra mulher\r\n",
 					"df = df.where((df['GrupoVulneravel'] == '1-Violência Contra a Mulher') | (df['GrupoVulneravel'] == '2-Violência Doméstica e Familiar Contra a Mulher'))"
 				],
-				"execution_count": null
+				"execution_count": 6
 			},
 			{
 				"cell_type": "code",
@@ -215,7 +215,7 @@
 					"#Filtrar apenas vitima do sexo feminino\r\n",
 					"df = df.where(df['SexoVitima'] == 'Feminino')"
 				],
-				"execution_count": null
+				"execution_count": 7
 			},
 			{
 				"cell_type": "code",
@@ -237,7 +237,7 @@
 					"\r\n",
 					"df = df.withColumn(\"IdadeSuspeito\", f.regexp_replace(f.col(\"IdadeSuspeito\"), \"[^0-9]\", \"\"))"
 				],
-				"execution_count": 383
+				"execution_count": 8
 			},
 			{
 				"cell_type": "code",
@@ -256,7 +256,7 @@
 					"# Escrever dados limpos em formato parque no azure storage\r\n",
 					"df.write.partitionBy(\"Ano\",\"Mes\").mode(\"overwrite\").parquet(\"/history_zone/2020/PrimeiroSemestre/\")"
 				],
-				"execution_count": 386
+				"execution_count": 9
 			},
 			{
 				"cell_type": "code",
@@ -275,7 +275,7 @@
 					"df = spark.read.parquet('/history_zone/2020/PrimeiroSemestre/')\r\n",
 					"df.limit(3).toPandas()"
 				],
-				"execution_count": 387
+				"execution_count": 10
 			}
 		]
 	}
