@@ -17,7 +17,7 @@
 				"spark.dynamicAllocation.enabled": "false",
 				"spark.dynamicAllocation.minExecutors": "2",
 				"spark.dynamicAllocation.maxExecutors": "2",
-				"spark.autotune.trackingId": "ee7017bd-ab96-4566-8853-a57ed611fcb3"
+				"spark.autotune.trackingId": "0b82cb73-6fa0-4b53-9442-135d32665f75"
 			}
 		},
 		"metadata": {
@@ -108,43 +108,6 @@
 					}
 				},
 				"source": [
-					"#df.filter(df._c0.like('%\"%')).collect()"
-				],
-				"execution_count": 138
-			},
-			{
-				"cell_type": "code",
-				"metadata": {
-					"jupyter": {
-						"source_hidden": false,
-						"outputs_hidden": false
-					},
-					"nteract": {
-						"transient": {
-							"deleting": false
-						}
-					},
-					"collapsed": false
-				},
-				"source": [
-					"display(df.limit(3))"
-				],
-				"execution_count": 139
-			},
-			{
-				"cell_type": "code",
-				"metadata": {
-					"jupyter": {
-						"source_hidden": false,
-						"outputs_hidden": false
-					},
-					"nteract": {
-						"transient": {
-							"deleting": false
-						}
-					}
-				},
-				"source": [
 					"from pyspark.sql.functions import *\r\n",
 					"\r\n",
 					"df = df.withColumn('_c0', regexp_replace('_c0', '\"', ''))\r\n",
@@ -155,30 +118,9 @@
 					"df = df.withColumn('_c0', regexp_replace('_c0', 'AGRESSOR POLICIAL/MILITAR;POLICIAL CIVIL', \"AGRESSOR POLICIAL/MILITAR,POLICIAL CIVIL\"))\r\n",
 					"df = df.withColumn('_c0', regexp_replace('_c0', 'AGRESSOR POLICIAL/MILITAR;POLICIAL MILITAR', \"AGRESSOR POLICIAL/MILITAR,POLICIAL MILITAR\"))\r\n",
 					"df = df.withColumn('_c0', regexp_replace('_c0', 'VÍTIMA IDOSA;CRIANÇA;DEFICIENTE OU MINORIA ÉTNICA OU SOCIAL', \"VÍTIMA IDOSA,CRIANÇA,DEFICIENTE OU MINORIA ÉTNICA OU SOCIAL\"))\r\n",
-					"\r\n",
-					"#;Forças Armadas;\r\n",
-					"\r\n",
 					""
 				],
 				"execution_count": 140
-			},
-			{
-				"cell_type": "code",
-				"metadata": {
-					"jupyter": {
-						"source_hidden": false,
-						"outputs_hidden": false
-					},
-					"nteract": {
-						"transient": {
-							"deleting": false
-						}
-					}
-				},
-				"source": [
-					"#df.collect()"
-				],
-				"execution_count": 141
 			},
 			{
 				"cell_type": "code",
