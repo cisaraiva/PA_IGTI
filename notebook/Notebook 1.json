@@ -1,0 +1,168 @@
+{
+	"name": "Notebook 1",
+	"properties": {
+		"nbformat": 4,
+		"nbformat_minor": 2,
+		"bigDataPool": {
+			"referenceName": "tcccibele",
+			"type": "BigDataPoolReference"
+		},
+		"sessionProperties": {
+			"driverMemory": "28g",
+			"driverCores": 4,
+			"executorMemory": "28g",
+			"executorCores": 4,
+			"numExecutors": 2,
+			"conf": {
+				"spark.dynamicAllocation.enabled": "false",
+				"spark.dynamicAllocation.minExecutors": "2",
+				"spark.dynamicAllocation.maxExecutors": "2",
+				"spark.autotune.trackingId": "edd0598f-d649-427e-be07-fb8967560adb"
+			}
+		},
+		"metadata": {
+			"saveOutput": true,
+			"enableDebugMode": false,
+			"kernelspec": {
+				"name": "synapse_pyspark",
+				"display_name": "Synapse PySpark"
+			},
+			"language_info": {
+				"name": "python"
+			},
+			"a365ComputeOptions": {
+				"id": "/subscriptions/c2e7ea02-c1b2-4906-9c73-95c7b9e0b637/resourceGroups/TCC_Cibele/providers/Microsoft.Synapse/workspaces/tcccibele/bigDataPools/tcccibele",
+				"name": "tcccibele",
+				"type": "Spark",
+				"endpoint": "https://tcccibele.dev.azuresynapse.net/livyApi/versions/2019-11-01-preview/sparkPools/tcccibele",
+				"auth": {
+					"type": "AAD",
+					"authResource": "https://dev.azuresynapse.net"
+				},
+				"sparkVersion": "3.1",
+				"nodeCount": 10,
+				"cores": 4,
+				"memory": 28,
+				"automaticScaleJobs": false
+			},
+			"sessionKeepAliveTimeout": 30
+		},
+		"cells": [
+			{
+				"cell_type": "code",
+				"source": [
+					"# Ler dados de 2019 da history zone \r\n",
+					"EscolaridadeVitima = spark.read.parquet('/history_zone/2019/EscolaridadeVitima/')\r\n",
+					"IdadeSuspeito = spark.read.parquet('/history_zone/2019/IdadeSuspeito/')\r\n",
+					"IdadeVitima = spark.read.parquet('/history_zone/2019/IdadeVitima/')\r\n",
+					"RacaSuspeito = spark.read.parquet('/history_zone/2019/RacaSuspeito/')\r\n",
+					"RacaVitima = spark.read.parquet('/history_zone/2019/RacaVitima/')\r\n",
+					"Suspeito = spark.read.parquet('/history_zone/2019/Suspeito/')\r\n",
+					"TipoViolacao = spark.read.parquet('/history_zone/2019/TipoViolacao/')"
+				],
+				"execution_count": 46
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"# Escrever dados limpos 2019 em formato parquet na consume zone\r\n",
+					"EscolaridadeVitima.write.format('parquet').mode('overwrite').save('/consumezone/2019/EscolaridadeVitima/')\r\n",
+					"IdadeSuspeito.write.format('parquet').mode('overwrite').save('/consumezone/2019/IdadeSuspeito/')\r\n",
+					"IdadeVitima.write.format('parquet').mode('overwrite').save('/consumezone/2019/IdadeVitima/')\r\n",
+					"RacaSuspeito.write.format('parquet').mode('overwrite').save('/consumezone/2019/RacaSuspeito/')\r\n",
+					"RacaVitima.write.format('parquet').mode('overwrite').save('/consumezone/2019/RacaVitima/')\r\n",
+					"Suspeito.write.format('parquet').mode('overwrite').save('/consumezone/2019/Suspeito/')\r\n",
+					"TipoViolacao.write.format('parquet').mode('overwrite').save('/consumezone/2019/TipoViolacao/')"
+				],
+				"execution_count": null
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"PrimeiroSemestre = spark.read.parquet('/history_zone/2020/PrimeiroSemestre/')\r\n",
+					"SegundoSemestre = spark.read.parquet('/history_zone/2020/SegundoSemestre/')"
+				],
+				"execution_count": null
+			},
+			{
+				"cell_type": "markdown",
+				"metadata": {
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					""
+				]
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"PrimeiroSemestre = PrimeiroSemestre.select('Trimestre','Dia','TipoViolacao','GrupoVulneravel','EspecieViolacao','UF', \\\r\n",
+					"    'CanalAtendimento','Denunciante','Motivacao','CenarioViolacao', \\\r\n",
+					"    'SexoVitima','IdadeVitima','EscolaridadeVitima','RacaVitima','FaixaRendaVitima','Ano','Mes')\r\n",
+					"\r\n",
+					"SegundoSemestre = SegundoSemestre.select('Trimestre','Dia','Categoria2','GrupoVulneravel','Categoria3','UF', \\\r\n",
+					"    'CanalAtendimento','Denunciante','Motivacao','CenarioViolacao', \\\r\n",
+					"    'SexoVitima','IdadeVitima','EscolaridadeVitima','RacaVitima','FaixaRendaVitima','Ano','Mes')\r\n",
+					"\r\n",
+					"df2020 = PrimeiroSemestre.unionAll(SegundoSemestre)"
+				],
+				"execution_count": null
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"df2020.write.partitionBy(\"Ano\",\"Mes\").mode(\"overwrite\").parquet(\"/consumezone/2020/\")"
+				],
+				"execution_count": null
+			}
+		]
+	}
+}
