@@ -17,7 +17,7 @@
 				"spark.dynamicAllocation.enabled": "false",
 				"spark.dynamicAllocation.minExecutors": "2",
 				"spark.dynamicAllocation.maxExecutors": "2",
-				"spark.autotune.trackingId": "a934bf45-1a14-4fb2-a145-b313f6778ad9"
+				"spark.autotune.trackingId": "a4061108-2f53-4b84-baa5-e41a5733a45f"
 			}
 		},
 		"metadata": {
@@ -111,7 +111,7 @@
 				"source": [
 					"df.groupBy(df['IdadeVitima']).count().orderBy('IdadeVitima').toPandas()"
 				],
-				"execution_count": 54
+				"execution_count": 55
 			},
 			{
 				"cell_type": "code",
