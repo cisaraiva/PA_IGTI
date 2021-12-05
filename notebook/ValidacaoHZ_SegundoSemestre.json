@@ -1,5 +1,5 @@
 {
-	"name": "ValidacaoHZ_PrimeiroSemestre",
+	"name": "ValidacaoHZ_SegundoSemestre",
 	"properties": {
 		"nbformat": 4,
 		"nbformat_minor": 2,
@@ -17,7 +17,7 @@
 				"spark.dynamicAllocation.enabled": "false",
 				"spark.dynamicAllocation.minExecutors": "2",
 				"spark.dynamicAllocation.maxExecutors": "2",
-				"spark.autotune.trackingId": "7f9ac42d-7746-461e-9378-326d39e7b786"
+				"spark.autotune.trackingId": "651a1fc3-c08a-4143-9bc7-24efa6845b38"
 			}
 		},
 		"metadata": {

@@ -3,6 +3,10 @@
 	"properties": {
 		"nbformat": 4,
 		"nbformat_minor": 2,
+		"bigDataPool": {
+			"referenceName": "tcccibele",
+			"type": "BigDataPoolReference"
+		},
 		"sessionProperties": {
 			"driverMemory": "28g",
 			"driverCores": 4,
@@ -13,7 +17,7 @@
 				"spark.dynamicAllocation.enabled": "false",
 				"spark.dynamicAllocation.minExecutors": "2",
 				"spark.dynamicAllocation.maxExecutors": "2",
-				"spark.autotune.trackingId": "e4f05e6f-96a5-44cb-8b50-eddcfe597810"
+				"spark.autotune.trackingId": "0f498566-d204-491d-b96d-a0fe0cc11793"
 			}
 		},
 		"metadata": {
@@ -25,6 +29,21 @@
 			},
 			"language_info": {
 				"name": "python"
+			},
+			"a365ComputeOptions": {
+				"id": "/subscriptions/c2e7ea02-c1b2-4906-9c73-95c7b9e0b637/resourceGroups/TCC_Cibele/providers/Microsoft.Synapse/workspaces/tcccibele/bigDataPools/tcccibele",
+				"name": "tcccibele",
+				"type": "Spark",
+				"endpoint": "https://tcccibele.dev.azuresynapse.net/livyApi/versions/2019-11-01-preview/sparkPools/tcccibele",
+				"auth": {
+					"type": "AAD",
+					"authResource": "https://dev.azuresynapse.net"
+				},
+				"sparkVersion": "3.1",
+				"nodeCount": 10,
+				"cores": 4,
+				"memory": 28,
+				"automaticScaleJobs": false
 			},
 			"sessionKeepAliveTimeout": 30
 		},
@@ -46,7 +65,7 @@
 					"from pyspark.sql.types import StructField, StructType, IntegerType, StringType\r\n",
 					"from pyspark.sql import functions as f"
 				],
-				"execution_count": 4
+				"execution_count": 2
 			},
 			{
 				"cell_type": "code",
@@ -83,7 +102,7 @@
 					"    StructField(\"Categoria6\", StringType(), True)\r\n",
 					"])"
 				],
-				"execution_count": 5
+				"execution_count": 3
 			},
 			{
 				"cell_type": "code",
@@ -105,7 +124,7 @@
 					"            .options(quote='\"', sep=';', encoding='ISO-8859-1') \\\r\n",
 					"            .load('/landing_zone/2020/segundo_semestre_2020.csv')"
 				],
-				"execution_count": 6
+				"execution_count": 4
 			},
 			{
 				"cell_type": "code",
@@ -125,7 +144,7 @@
 					"df = df.where((df[0].isNotNull()) \\\r\n",
 					"                & (df[0] != 'Ano'))"
 				],
-				"execution_count": 8
+				"execution_count": 5
 			},
 			{
 				"cell_type": "code",
@@ -150,7 +169,7 @@
 					"\r\n",
 					"df = df.fillna(0)"
 				],
-				"execution_count": 9
+				"execution_count": 6
 			},
 			{
 				"cell_type": "code",
@@ -168,7 +187,7 @@
 				"source": [
 					"df.limit(3).toPandas()"
 				],
-				"execution_count": 10
+				"execution_count": 7
 			},
 			{
 				"cell_type": "code",
@@ -190,7 +209,7 @@
 					"df.write.partitionBy(\"Ano\",\"Mes\").mode(\"overwrite\").parquet(\"/history_zone/2020/SegundoSemestre/\")\r\n",
 					""
 				],
-				"execution_count": 11
+				"execution_count": 8
 			},
 			{
 				"cell_type": "code",
@@ -209,7 +228,7 @@
 					"df = spark.read.parquet('/history_zone/2020/SegundoSemestre/')\r\n",
 					"df.limit(3).toPandas()"
 				],
-				"execution_count": 13
+				"execution_count": 9
 			}
 		]
 	}
