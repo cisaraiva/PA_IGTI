@@ -1,5 +1,5 @@
 {
-	"name": "Notebook 1",
+	"name": "Consume zone",
 	"properties": {
 		"nbformat": 4,
 		"nbformat_minor": 2,
@@ -17,7 +17,7 @@
 				"spark.dynamicAllocation.enabled": "false",
 				"spark.dynamicAllocation.minExecutors": "2",
 				"spark.dynamicAllocation.maxExecutors": "2",
-				"spark.autotune.trackingId": "edd0598f-d649-427e-be07-fb8967560adb"
+				"spark.autotune.trackingId": "ddc9483f-d27e-4494-a6d4-828d6123c996"
 			}
 		},
 		"metadata": {
@@ -60,7 +60,7 @@
 					"Suspeito = spark.read.parquet('/history_zone/2019/Suspeito/')\r\n",
 					"TipoViolacao = spark.read.parquet('/history_zone/2019/TipoViolacao/')"
 				],
-				"execution_count": 46
+				"execution_count": 51
 			},
 			{
 				"cell_type": "code",
@@ -77,15 +77,15 @@
 				},
 				"source": [
 					"# Escrever dados limpos 2019 em formato parquet na consume zone\r\n",
-					"EscolaridadeVitima.write.format('parquet').mode('overwrite').save('/consumezone/2019/EscolaridadeVitima/')\r\n",
-					"IdadeSuspeito.write.format('parquet').mode('overwrite').save('/consumezone/2019/IdadeSuspeito/')\r\n",
-					"IdadeVitima.write.format('parquet').mode('overwrite').save('/consumezone/2019/IdadeVitima/')\r\n",
-					"RacaSuspeito.write.format('parquet').mode('overwrite').save('/consumezone/2019/RacaSuspeito/')\r\n",
-					"RacaVitima.write.format('parquet').mode('overwrite').save('/consumezone/2019/RacaVitima/')\r\n",
-					"Suspeito.write.format('parquet').mode('overwrite').save('/consumezone/2019/Suspeito/')\r\n",
-					"TipoViolacao.write.format('parquet').mode('overwrite').save('/consumezone/2019/TipoViolacao/')"
+					"EscolaridadeVitima.write.format('parquet').mode('overwrite').save('/consumer_zone/2019/EscolaridadeVitima/')\r\n",
+					"IdadeSuspeito.write.format('parquet').mode('overwrite').save('/consumer_zone/2019/IdadeSuspeito/')\r\n",
+					"IdadeVitima.write.format('parquet').mode('overwrite').save('/consumer_zone/2019/IdadeVitima/')\r\n",
+					"RacaSuspeito.write.format('parquet').mode('overwrite').save('/consumer_zone/2019/RacaSuspeito/')\r\n",
+					"RacaVitima.write.format('parquet').mode('overwrite').save('/consumer_zone/2019/RacaVitima/')\r\n",
+					"Suspeito.write.format('parquet').mode('overwrite').save('/consumer_zone/2019/Suspeito/')\r\n",
+					"TipoViolacao.write.format('parquet').mode('overwrite').save('/consumer_zone/2019/TipoViolacao/')"
 				],
-				"execution_count": null
+				"execution_count": 52
 			},
 			{
 				"cell_type": "code",
@@ -104,7 +104,7 @@
 					"PrimeiroSemestre = spark.read.parquet('/history_zone/2020/PrimeiroSemestre/')\r\n",
 					"SegundoSemestre = spark.read.parquet('/history_zone/2020/SegundoSemestre/')"
 				],
-				"execution_count": null
+				"execution_count": 53
 			},
 			{
 				"cell_type": "markdown",
@@ -143,7 +143,7 @@
 					"\r\n",
 					"df2020 = PrimeiroSemestre.unionAll(SegundoSemestre)"
 				],
-				"execution_count": null
+				"execution_count": 54
 			},
 			{
 				"cell_type": "code",
@@ -159,9 +159,9 @@
 					}
 				},
 				"source": [
-					"df2020.write.partitionBy(\"Ano\",\"Mes\").mode(\"overwrite\").parquet(\"/consumezone/2020/\")"
+					"df2020.write.partitionBy(\"Ano\",\"Mes\").mode(\"overwrite\").parquet(\"/consumer_zone/2020/\")"
 				],
-				"execution_count": null
+				"execution_count": 55
 			}
 		]
 	}
