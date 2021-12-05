@@ -17,7 +17,7 @@
 				"spark.dynamicAllocation.enabled": "false",
 				"spark.dynamicAllocation.minExecutors": "2",
 				"spark.dynamicAllocation.maxExecutors": "2",
-				"spark.autotune.trackingId": "08623c83-9dc1-4e10-9ba7-a6b4b7542dd2"
+				"spark.autotune.trackingId": "897f4e33-5962-4ebc-9732-78fea4cb456b"
 			}
 		},
 		"metadata": {
@@ -66,7 +66,7 @@
 					"from pyspark.sql import functions as f\r\n",
 					"import pandas as pd"
 				],
-				"execution_count": 195
+				"execution_count": 328
 			},
 			{
 				"cell_type": "code",
@@ -108,7 +108,7 @@
 					"    StructField(\"DeficienciaSuspeito\", StringType(), True)\r\n",
 					"])"
 				],
-				"execution_count": 196
+				"execution_count": 329
 			},
 			{
 				"cell_type": "code",
@@ -130,7 +130,7 @@
 					"            .options(sep=';', encoding='ISO-8859-1') \\\r\n",
 					"            .load('/landing_zone/2020/primeiro_semestre_2020_1.csv')"
 				],
-				"execution_count": 239
+				"execution_count": 330
 			},
 			{
 				"cell_type": "code",
@@ -149,7 +149,7 @@
 					"# Remover linhas nulas e header\r\n",
 					"df = df.where((df[0].isNotNull()) & (df[0] != 'Ano'))"
 				],
-				"execution_count": 240
+				"execution_count": 331
 			},
 			{
 				"cell_type": "code",
@@ -167,7 +167,7 @@
 				"source": [
 					"df.limit(3).toPandas()"
 				],
-				"execution_count": 199
+				"execution_count": 332
 			},
 			{
 				"cell_type": "code",
@@ -195,7 +195,7 @@
 					"\r\n",
 					"df = df.fillna(0)"
 				],
-				"execution_count": 241
+				"execution_count": 333
 			},
 			{
 				"cell_type": "code",
@@ -211,29 +211,9 @@
 					}
 				},
 				"source": [
-					"df.groupBy(df['GrupoVulneravel']).count().orderBy(df['GrupoVulneravel']).toPandas()"
+					"df = df.where((df['GrupoVulneravel'] == '1-violência Contra A Mulher') | (df['GrupoVulneravel'] == '2-violência Doméstica E Familiar Contra A Mulher'))"
 				],
-				"execution_count": 242
-			},
-			{
-				"cell_type": "code",
-				"metadata": {
-					"jupyter": {
-						"source_hidden": false,
-						"outputs_hidden": false
-					},
-					"nteract": {
-						"transient": {
-							"deleting": false
-						}
-					}
-				},
-				"source": [
-					"# filtrar apenas grupo vulneravel relativo a violência contra mulher\r\n",
-					"df = df.where((df['GrupoVulneravel'] == '1-violência Contra A Mulher') | (df['GrupoVulneravel'] == '2-violência Doméstica E Familiar Contra A Mulher'))\r\n",
-					"#df.where(df['GrupoVulneravel'] == '1-violência Contra A Mulher').toPandas()"
-				],
-				"execution_count": 243
+				"execution_count": 334
 			},
 			{
 				"cell_type": "code",
@@ -252,7 +232,7 @@
 					"#Filtrar apenas vitima do sexo feminino\r\n",
 					"df = df.where(df['SexoVitima'] == 'Feminino')"
 				],
-				"execution_count": 244
+				"execution_count": 335
 			},
 			{
 				"cell_type": "code",
@@ -270,11 +250,11 @@
 				"source": [
 					"# Limpar idades\r\n",
 					"#df = df.withColumn(\"IdadeVitima\", f.regexp_replace(f.col(\"IdadeVitima\"), \"[a-Z][\\+$]\", \"\"))\r\n",
-					"df = df.withColumn(\"IdadeVitima_Tratada\", f.regexp_replace(f.col(\"IdadeVitima\"), \"[^0-9]\", \"\"))\r\n",
+					"df = df.withColumn(\"IdadeVitima_Tratada\", f.regexp_replace(f.col(\"IdadeVitima\"), \"[^0-9-]\", \"\"))\r\n",
 					"\r\n",
 					"df = df.withColumn(\"IdadeSuspeito_Tratada\", f.regexp_replace(f.col(\"IdadeSuspeito\"), \"[^0-9]\", \"\"))"
 				],
-				"execution_count": 222
+				"execution_count": 336
 			},
 			{
 				"cell_type": "code",
@@ -290,14 +270,9 @@
 					}
 				},
 				"source": [
-					"#df = df.withColumn('IdadeVitima_2', f.regexp_replace('IdadeVitima', \"'+ \", \"\"))\r\n",
-					"#df = df.withColumn('IdadeVitima_2', f.regexp_replace('IdadeVitima', \"Uns\", \"\"))\r\n",
-					"#df['IdadeVitima'].str.re\r\n",
-					"#df = df.withColumn('IdadeVitima_2', f.regexp_replace('IdadeVitima', \"'+ \", \"\"))\r\n",
-					"\r\n",
-					"df.IdadeVitima.str.replace(\"'+ \", \"\")"
+					"df.groupBy(df['GrupoVulneravel']).count().orderBy(df['GrupoVulneravel']).toPandas()"
 				],
-				"execution_count": 245
+				"execution_count": 337
 			},
 			{
 				"cell_type": "code",
@@ -317,49 +292,10 @@
 					"\r\n",
 					"#print(df.col('IdadeVitima').replace('1',''))\r\n",
 					"\r\n",
-					"df['IdadeVitima']=df.IdadeVitima.replace({\"'+ \": \"\"},regex=False)\r\n",
+					"#df['IdadeVitima']=df.IdadeVitima.replace({\"'+ \": \"\"},regex=False)\r\n",
 					""
 				],
-				"execution_count": 255
-			},
-			{
-				"cell_type": "code",
-				"metadata": {
-					"jupyter": {
-						"source_hidden": false,
-						"outputs_hidden": false
-					},
-					"nteract": {
-						"transient": {
-							"deleting": false
-						}
-					}
-				},
-				"source": [
-					"#df['IdadeVitima'].str.replace(\"Uns\", \"\")\r\n",
-					"#df.withColumn('IdadeVitima', df['IdadeVitima'].replace(\"Uns\", \"\"))\r\n",
-					"df['IdadeVitima'](f.col('IdadeVitima'),'d','')\r\n",
-					"#f.col('IdadeVitima').apply(lambda st: st[st.find(\"[\")+1:st.find(\"]\")])"
-				],
-				"execution_count": 236
-			},
-			{
-				"cell_type": "code",
-				"metadata": {
-					"jupyter": {
-						"source_hidden": false,
-						"outputs_hidden": false
-					},
-					"nteract": {
-						"transient": {
-							"deleting": false
-						}
-					}
-				},
-				"source": [
-					"df.groupBy(df['IdadeVitima_2']).count().orderBy(df['IdadeVitima_2']).toPandas()"
-				],
-				"execution_count": 225
+				"execution_count": 338
 			},
 			{
 				"cell_type": "code",
@@ -378,7 +314,7 @@
 					"# Escrever dados limpos em formato parque no azure storage\r\n",
 					"df.write.partitionBy(\"Ano\",\"Mes\").mode(\"overwrite\").parquet(\"/history_zone/2020/PrimeiroSemestre/\")"
 				],
-				"execution_count": 206
+				"execution_count": 339
 			},
 			{
 				"cell_type": "code",
@@ -397,7 +333,29 @@
 					"df = spark.read.parquet('/history_zone/2020/PrimeiroSemestre/')\r\n",
 					"df.limit(3).toPandas()"
 				],
-				"execution_count": 207
+				"execution_count": 340
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"#df.groupBy(df['IdadeVitima']).count().orderBy(df['IdadeVitima']).toPandas()\r\n",
+					"\r\n",
+					"df1 = df.select('IdadeVitima','IdadeVitima_Tratada').where(df['IdadeVitima']!=df['IdadeVitima_Tratada'])\r\n",
+					"\r\n",
+					"df.select('IdadeVitima_Tratada').distinct().toPandas()"
+				],
+				"execution_count": 341
 			}
 		]
 	}
