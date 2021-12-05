@@ -17,7 +17,7 @@
 				"spark.dynamicAllocation.enabled": "false",
 				"spark.dynamicAllocation.minExecutors": "2",
 				"spark.dynamicAllocation.maxExecutors": "2",
-				"spark.autotune.trackingId": "0f498566-d204-491d-b96d-a0fe0cc11793"
+				"spark.autotune.trackingId": "dfb4b9a8-7ee8-4510-a95b-ae554e4a9b8f"
 			}
 		},
 		"metadata": {
@@ -65,7 +65,7 @@
 					"from pyspark.sql.types import StructField, StructType, IntegerType, StringType\r\n",
 					"from pyspark.sql import functions as f"
 				],
-				"execution_count": 2
+				"execution_count": 12
 			},
 			{
 				"cell_type": "code",
@@ -102,7 +102,7 @@
 					"    StructField(\"Categoria6\", StringType(), True)\r\n",
 					"])"
 				],
-				"execution_count": 3
+				"execution_count": 13
 			},
 			{
 				"cell_type": "code",
@@ -122,9 +122,9 @@
 					"df = spark.read.format(\"csv\") \\\r\n",
 					"            .schema(schema) \\\r\n",
 					"            .options(quote='\"', sep=';', encoding='ISO-8859-1') \\\r\n",
-					"            .load('/landing_zone/2020/segundo_semestre_2020.csv')"
+					"            .load('/landing_zone/2020/segundo_semestre_2020_1.csv')"
 				],
-				"execution_count": 4
+				"execution_count": null
 			},
 			{
 				"cell_type": "code",
@@ -144,7 +144,7 @@
 					"df = df.where((df[0].isNotNull()) \\\r\n",
 					"                & (df[0] != 'Ano'))"
 				],
-				"execution_count": 5
+				"execution_count": null
 			},
 			{
 				"cell_type": "code",
