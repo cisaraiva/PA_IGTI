@@ -17,7 +17,7 @@
 				"spark.dynamicAllocation.enabled": "false",
 				"spark.dynamicAllocation.minExecutors": "2",
 				"spark.dynamicAllocation.maxExecutors": "2",
-				"spark.autotune.trackingId": "8232cfc8-c3e4-4188-94ed-599d6d26f87d"
+				"spark.autotune.trackingId": "d3f5231f-7226-49d1-8891-1ea7bca92808"
 			}
 		},
 		"metadata": {
@@ -66,7 +66,7 @@
 					"from pyspark.sql import functions as f\r\n",
 					"import pandas as pd"
 				],
-				"execution_count": 238
+				"execution_count": 261
 			},
 			{
 				"cell_type": "code",
@@ -75,7 +75,7 @@
 					"#df = df.where(df[11] != 'Bar')\r\n",
 					"#df.select('EscolaridadeVitima','IdadeSuspeito','IdadeVitima','RacaSuspeito','RacaVitima','RelacaoVitimaSuspeito', 'TipoViolacao').toPandas()"
 				],
-				"execution_count": 239
+				"execution_count": 262
 			},
 			{
 				"cell_type": "code",
@@ -94,25 +94,7 @@
 					"#df.groupBy(df['SexoVitima']).count().orderBy(df['SexoVitima'])\r\n",
 					"df.groupBy(df['SexoVitima']).count().orderBy(df['SexoVitima']).toPandas()"
 				],
-				"execution_count": 260
-			},
-			{
-				"cell_type": "code",
-				"metadata": {
-					"jupyter": {
-						"source_hidden": false,
-						"outputs_hidden": false
-					},
-					"nteract": {
-						"transient": {
-							"deleting": false
-						}
-					}
-				},
-				"source": [
-					"df.toPandas()"
-				],
-				"execution_count": 248
+				"execution_count": 263
 			},
 			{
 				"cell_type": "code",
@@ -129,15 +111,27 @@
 					"collapsed": false
 				},
 				"source": [
-					"#df.select('CenarioViolacao','Agravantes','AgravantesPoliciais','RelacaoVitimaSuspeito').distinct().toPandas()\r\n",
-					"#df.select('CenarioViolacao').distinct().toPandas()\r\n",
-					"\r\n",
-					"#df.where(df['SexoVitima'] != 'Feminino').toPandas()\r\n",
-					"\r\n",
-					"df.where(df['SexoVitima'] == 'Feminino').toPandas()\r\n",
-					"#df.select('CenarioViolacao','Agravantes','AgravantesPoliciais','RelacaoVitimaSuspeito','SexoVitima','IdadeVitima','EscolaridadeVitima','RacaVitima').where(df['SexoVitima'] != 'Feminino').toPandas()"
+					"display(df.where(f.col(\"SexoVitima\").isNull()))"
 				],
-				"execution_count": 252
+				"execution_count": 273
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"df.count()"
+				],
+				"execution_count": 274
 			},
 			{
 				"cell_type": "code",
@@ -156,7 +150,7 @@
 					"df.where(df['CenarioViolacao'] != 'Bar').toPandas()\r\n",
 					"#df.where(df[1] == 27).toPandas()"
 				],
-				"execution_count": null
+				"execution_count": 266
 			}
 		]
 	}
