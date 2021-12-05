@@ -17,7 +17,7 @@
 				"spark.dynamicAllocation.enabled": "false",
 				"spark.dynamicAllocation.minExecutors": "2",
 				"spark.dynamicAllocation.maxExecutors": "2",
-				"spark.autotune.trackingId": "de8b8a21-a433-4430-b64c-8ad769bfaa6b"
+				"spark.autotune.trackingId": "2cc6b418-d2b6-4e45-a35b-2e4ee9b1303d"
 			}
 		},
 		"metadata": {
@@ -66,7 +66,7 @@
 					"from pyspark.sql import functions as f\r\n",
 					"import pandas as pd"
 				],
-				"execution_count": 279
+				"execution_count": 312
 			},
 			{
 				"cell_type": "code",
@@ -108,7 +108,7 @@
 					"    StructField(\"DeficienciaSuspeito\", StringType(), True)\r\n",
 					"])"
 				],
-				"execution_count": null
+				"execution_count": 313
 			},
 			{
 				"cell_type": "code",
@@ -130,7 +130,7 @@
 					"            .options(quote='\"', sep=';', encoding='ISO-8859-1') \\\r\n",
 					"            .load('/landing_zone/2020/primeiro_semestre_2020_1.csv')"
 				],
-				"execution_count": null
+				"execution_count": 314
 			},
 			{
 				"cell_type": "code",
@@ -152,7 +152,7 @@
 					"df = df.where((df[0].isNotNull()) \\\r\n",
 					"                & (df[0] != 'Ano'))"
 				],
-				"execution_count": null
+				"execution_count": 315
 			},
 			{
 				"cell_type": "code",
@@ -184,9 +184,11 @@
 					"\r\n",
 					"df = df.where(df['SexoVitima'] == 'Feminino')\r\n",
 					"\r\n",
-					"df['IdadeVitima'] = df.select(f.regexp_replace(f.col(\"IdadeVitima\"), \"^\\s+$\", \"\"))"
+					"df = df.withColumn(\"IdadeVitima\", f.regexp_replace(f.col(\"IdadeVitima\"), \"^\\s+$\", \"\"))\r\n",
+					"\r\n",
+					"df = df.withColumn(\"IdadeSuspeito\", f.regexp_replace(f.col(\"IdadeSuspeito\"), \"^\\s+$\", \"\"))"
 				],
-				"execution_count": null
+				"execution_count": 316
 			},
 			{
 				"cell_type": "code",
@@ -204,7 +206,7 @@
 				"source": [
 					"df.limit(3).toPandas()"
 				],
-				"execution_count": null
+				"execution_count": 317
 			},
 			{
 				"cell_type": "code",
@@ -226,7 +228,7 @@
 					"df.write.partitionBy(\"Ano\",\"Mes\").mode(\"overwrite\").parquet(\"/history_zone/2020/PrimeiroSemestre/\")\r\n",
 					""
 				],
-				"execution_count": null
+				"execution_count": 318
 			},
 			{
 				"cell_type": "code",
@@ -245,7 +247,7 @@
 					"df = spark.read.parquet('/history_zone/2020/PrimeiroSemestre/')\r\n",
 					"df.limit(3).toPandas()"
 				],
-				"execution_count": null
+				"execution_count": 319
 			}
 		]
 	}
