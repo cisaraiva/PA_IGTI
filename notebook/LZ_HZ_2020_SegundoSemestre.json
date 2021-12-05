@@ -17,7 +17,7 @@
 				"spark.dynamicAllocation.enabled": "false",
 				"spark.dynamicAllocation.minExecutors": "2",
 				"spark.dynamicAllocation.maxExecutors": "2",
-				"spark.autotune.trackingId": "dfb4b9a8-7ee8-4510-a95b-ae554e4a9b8f"
+				"spark.autotune.trackingId": "8ee4331b-fb28-4c6e-bed9-4393372d35c3"
 			}
 		},
 		"metadata": {
@@ -124,7 +124,7 @@
 					"            .options(quote='\"', sep=';', encoding='ISO-8859-1') \\\r\n",
 					"            .load('/landing_zone/2020/segundo_semestre_2020_1.csv')"
 				],
-				"execution_count": null
+				"execution_count": 14
 			},
 			{
 				"cell_type": "code",
@@ -141,10 +141,12 @@
 				},
 				"source": [
 					"# Remover colunas e linhas sem valor para o data lake\r\n",
+					"df = df.where((df['GrupoVulneravel'] == '1-Violência Contra a Mulher') | (df['GrupoVulneravel'] == '2-Violência Doméstica e Familiar Contra a Mulher'))\r\n",
+					"\r\n",
 					"df = df.where((df[0].isNotNull()) \\\r\n",
 					"                & (df[0] != 'Ano'))"
 				],
-				"execution_count": null
+				"execution_count": 15
 			},
 			{
 				"cell_type": "code",
@@ -161,15 +163,24 @@
 				},
 				"source": [
 					"# Capitalizar todos os textos e incluir 0 onde há nulos\r\n",
+					"df = df.na.replace('N/D', None)\r\n",
+					"\r\n",
+					"df = df.fillna(0)\r\n",
+					"\r\n",
 					"names = df.schema.names\r\n",
 					"for name in names:\r\n",
+					"    if name == 'UF':\r\n",
+					"        continue\r\n",
 					"    df = df.withColumn(name, f.initcap(f.col(name)))\r\n",
-					"    #df = df.withColumn(name,f.regexp_replace(name,',',''))\r\n",
-					"    #df = df.withColumn(name, df[name].cast(IntegerType()))\r\n",
+					"    df = df.withColumn(name, f.trim(f.col(name)))\r\n",
 					"\r\n",
-					"df = df.fillna(0)"
+					"df = df.where(df['SexoVitima'] == 'Feminino')\r\n",
+					"\r\n",
+					"df = df.withColumn(\"IdadeVitima\", f.regexp_replace(f.col(\"IdadeVitima\"), \"[^0-9]\", \"\"))\r\n",
+					"\r\n",
+					"df = df.withColumn(\"IdadeSuspeito\", f.regexp_replace(f.col(\"IdadeSuspeito\"), \"[^0-9]\", \"\"))"
 				],
-				"execution_count": 6
+				"execution_count": 16
 			},
 			{
 				"cell_type": "code",
@@ -187,7 +198,7 @@
 				"source": [
 					"df.limit(3).toPandas()"
 				],
-				"execution_count": 7
+				"execution_count": 17
 			},
 			{
 				"cell_type": "code",
@@ -209,7 +220,7 @@
 					"df.write.partitionBy(\"Ano\",\"Mes\").mode(\"overwrite\").parquet(\"/history_zone/2020/SegundoSemestre/\")\r\n",
 					""
 				],
-				"execution_count": 8
+				"execution_count": 18
 			},
 			{
 				"cell_type": "code",
@@ -228,7 +239,7 @@
 					"df = spark.read.parquet('/history_zone/2020/SegundoSemestre/')\r\n",
 					"df.limit(3).toPandas()"
 				],
-				"execution_count": 9
+				"execution_count": null
 			}
 		]
 	}
