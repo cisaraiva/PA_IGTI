@@ -17,7 +17,7 @@
 				"spark.dynamicAllocation.enabled": "false",
 				"spark.dynamicAllocation.minExecutors": "2",
 				"spark.dynamicAllocation.maxExecutors": "2",
-				"spark.autotune.trackingId": "2cc6b418-d2b6-4e45-a35b-2e4ee9b1303d"
+				"spark.autotune.trackingId": "7e52f2c2-6ad2-4919-acef-158359eff7ef"
 			}
 		},
 		"metadata": {
@@ -66,7 +66,7 @@
 					"from pyspark.sql import functions as f\r\n",
 					"import pandas as pd"
 				],
-				"execution_count": 312
+				"execution_count": 342
 			},
 			{
 				"cell_type": "code",
@@ -108,7 +108,7 @@
 					"    StructField(\"DeficienciaSuspeito\", StringType(), True)\r\n",
 					"])"
 				],
-				"execution_count": 313
+				"execution_count": 343
 			},
 			{
 				"cell_type": "code",
@@ -130,7 +130,7 @@
 					"            .options(quote='\"', sep=';', encoding='ISO-8859-1') \\\r\n",
 					"            .load('/landing_zone/2020/primeiro_semestre_2020_1.csv')"
 				],
-				"execution_count": 314
+				"execution_count": 344
 			},
 			{
 				"cell_type": "code",
@@ -152,7 +152,7 @@
 					"df = df.where((df[0].isNotNull()) \\\r\n",
 					"                & (df[0] != 'Ano'))"
 				],
-				"execution_count": 315
+				"execution_count": 345
 			},
 			{
 				"cell_type": "code",
@@ -184,11 +184,29 @@
 					"\r\n",
 					"df = df.where(df['SexoVitima'] == 'Feminino')\r\n",
 					"\r\n",
-					"df = df.withColumn(\"IdadeVitima\", f.regexp_replace(f.col(\"IdadeVitima\"), \"^\\s+$\", \"\"))\r\n",
+					"df = df.withColumn(\"IdadeVitima\", f.regexp_replace(f.col(\"IdadeVitima\"), \"[a-Z]\", \"\"))\r\n",
 					"\r\n",
 					"df = df.withColumn(\"IdadeSuspeito\", f.regexp_replace(f.col(\"IdadeSuspeito\"), \"^\\s+$\", \"\"))"
 				],
-				"execution_count": 316
+				"execution_count": 351
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"df.groupBy(df['IdadeVitima']).count().toPandas()"
+				],
+				"execution_count": 353
 			},
 			{
 				"cell_type": "code",
@@ -206,7 +224,7 @@
 				"source": [
 					"df.limit(3).toPandas()"
 				],
-				"execution_count": 317
+				"execution_count": 348
 			},
 			{
 				"cell_type": "code",
@@ -228,7 +246,7 @@
 					"df.write.partitionBy(\"Ano\",\"Mes\").mode(\"overwrite\").parquet(\"/history_zone/2020/PrimeiroSemestre/\")\r\n",
 					""
 				],
-				"execution_count": 318
+				"execution_count": 349
 			},
 			{
 				"cell_type": "code",
@@ -247,7 +265,7 @@
 					"df = spark.read.parquet('/history_zone/2020/PrimeiroSemestre/')\r\n",
 					"df.limit(3).toPandas()"
 				],
-				"execution_count": 319
+				"execution_count": 350
 			}
 		]
 	}
