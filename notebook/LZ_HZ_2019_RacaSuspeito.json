@@ -17,7 +17,7 @@
 				"spark.dynamicAllocation.enabled": "false",
 				"spark.dynamicAllocation.minExecutors": "2",
 				"spark.dynamicAllocation.maxExecutors": "2",
-				"spark.autotune.trackingId": "d3e181a6-4547-4e0e-bf84-083b6234f878"
+				"spark.autotune.trackingId": "f39af115-1fa4-4ea5-925e-93fc841687e8"
 			}
 		},
 		"metadata": {
@@ -89,7 +89,7 @@
 					"    StructField(\"Total\", StringType(), True)\r\n",
 					"])"
 				],
-				"execution_count": null
+				"execution_count": 3
 			},
 			{
 				"cell_type": "code",
@@ -111,7 +111,7 @@
 					"            .options(quote='\"') \\\r\n",
 					"            .load('/landing_zone/2019/Balanco-2019-Ligue180-Raça-cor do Suspeito.csv')"
 				],
-				"execution_count": null
+				"execution_count": 4
 			},
 			{
 				"cell_type": "code",
@@ -135,7 +135,7 @@
 					"df = df.drop('None')\r\n",
 					"df = df.drop('Total')"
 				],
-				"execution_count": null
+				"execution_count": 5
 			},
 			{
 				"cell_type": "code",
@@ -161,7 +161,7 @@
 					"\r\n",
 					"df = df.fillna(0)"
 				],
-				"execution_count": null
+				"execution_count": 6
 			},
 			{
 				"cell_type": "code",
@@ -180,7 +180,7 @@
 					"# Escrever dados limpos em formato parque no azure storage\r\n",
 					"df.write.format('parquet').mode('overwrite').save('/history_zone/2019/RacaSuspeito/')"
 				],
-				"execution_count": null
+				"execution_count": 7
 			},
 			{
 				"cell_type": "code",
@@ -199,7 +199,7 @@
 					"df = spark.read.parquet('/history_zone/2019/RacaSuspeito/')\r\n",
 					"df.toPandas()"
 				],
-				"execution_count": null
+				"execution_count": 8
 			}
 		]
 	}

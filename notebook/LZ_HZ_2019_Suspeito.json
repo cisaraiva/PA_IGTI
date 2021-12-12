@@ -17,7 +17,7 @@
 				"spark.dynamicAllocation.enabled": "false",
 				"spark.dynamicAllocation.minExecutors": "2",
 				"spark.dynamicAllocation.maxExecutors": "2",
-				"spark.autotune.trackingId": "258fcedc-b445-4922-83de-e9cdad728cc5"
+				"spark.autotune.trackingId": "415faed1-0443-4fc2-b1b5-17bd421767ad"
 			}
 		},
 		"metadata": {
@@ -65,7 +65,7 @@
 					"from pyspark.sql.types import StructField, StructType, IntegerType, StringType\r\n",
 					"from pyspark.sql import functions as f"
 				],
-				"execution_count": 1
+				"execution_count": 2
 			},
 			{
 				"cell_type": "code",
