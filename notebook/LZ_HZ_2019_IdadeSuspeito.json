@@ -17,7 +17,7 @@
 				"spark.dynamicAllocation.enabled": "false",
 				"spark.dynamicAllocation.minExecutors": "2",
 				"spark.dynamicAllocation.maxExecutors": "2",
-				"spark.autotune.trackingId": "39f95ed0-4ef2-4e32-8bd6-b2677c5919fd"
+				"spark.autotune.trackingId": "e9c97127-fa8b-40c9-8ec4-6a0f28d4cb6d"
 			}
 		},
 		"metadata": {
@@ -89,7 +89,7 @@
 					"    StructField(\"Total\", StringType(), True)\r\n",
 					"])"
 				],
-				"execution_count": null
+				"execution_count": 2
 			},
 			{
 				"cell_type": "code",
@@ -111,7 +111,7 @@
 					"            .options(quote='\"') \\\r\n",
 					"            .load('/landing_zone/2019/Balanco-2019-Ligue180-Idade Suspeito.csv')"
 				],
-				"execution_count": null
+				"execution_count": 3
 			},
 			{
 				"cell_type": "code",
@@ -129,7 +129,7 @@
 				"source": [
 					"df.toPandas()"
 				],
-				"execution_count": null
+				"execution_count": 4
 			},
 			{
 				"cell_type": "code",
@@ -153,7 +153,7 @@
 					"df = df.drop('None')\r\n",
 					"df = df.drop('Total')"
 				],
-				"execution_count": null
+				"execution_count": 5
 			},
 			{
 				"cell_type": "code",
@@ -179,7 +179,7 @@
 					"\r\n",
 					"df = df.fillna(0)"
 				],
-				"execution_count": null
+				"execution_count": 6
 			},
 			{
 				"cell_type": "code",
@@ -198,7 +198,7 @@
 					"# Escrever dados limpos em formato parque no azure storage\r\n",
 					"df.write.format('parquet').mode('overwrite').save('/history_zone/2019/IdadeSuspeito/')"
 				],
-				"execution_count": null
+				"execution_count": 7
 			},
 			{
 				"cell_type": "code",
@@ -217,7 +217,7 @@
 					"df = spark.read.parquet('/history_zone/2019/IdadeSuspeito/')\r\n",
 					"df.toPandas()"
 				],
-				"execution_count": null
+				"execution_count": 8
 			}
 		]
 	}
