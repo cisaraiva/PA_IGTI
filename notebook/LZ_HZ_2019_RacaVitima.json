@@ -3,6 +3,10 @@
 	"properties": {
 		"nbformat": 4,
 		"nbformat_minor": 2,
+		"bigDataPool": {
+			"referenceName": "tcccibele2",
+			"type": "BigDataPoolReference"
+		},
 		"sessionProperties": {
 			"driverMemory": "28g",
 			"driverCores": 4,
@@ -13,7 +17,7 @@
 				"spark.dynamicAllocation.enabled": "false",
 				"spark.dynamicAllocation.minExecutors": "2",
 				"spark.dynamicAllocation.maxExecutors": "2",
-				"spark.autotune.trackingId": "b979a079-eab7-4d6d-9e94-8e05753e440e"
+				"spark.autotune.trackingId": "78a258df-f1a3-4831-bb96-6ccefc7d54df"
 			}
 		},
 		"metadata": {
@@ -25,6 +29,21 @@
 			},
 			"language_info": {
 				"name": "python"
+			},
+			"a365ComputeOptions": {
+				"id": "/subscriptions/3768861a-a3bf-47a5-a888-a7be0541a195/resourceGroups/tcc_cibele2/providers/Microsoft.Synapse/workspaces/tcccibele2/bigDataPools/tcccibele2",
+				"name": "tcccibele2",
+				"type": "Spark",
+				"endpoint": "https://tcccibele2.dev.azuresynapse.net/livyApi/versions/2019-11-01-preview/sparkPools/tcccibele2",
+				"auth": {
+					"type": "AAD",
+					"authResource": "https://dev.azuresynapse.net"
+				},
+				"sparkVersion": "3.1",
+				"nodeCount": 10,
+				"cores": 4,
+				"memory": 28,
+				"automaticScaleJobs": false
 			},
 			"sessionKeepAliveTimeout": 30
 		},
@@ -70,7 +89,7 @@
 					"    StructField(\"Total\", StringType(), True)\r\n",
 					"])"
 				],
-				"execution_count": 2
+				"execution_count": null
 			},
 			{
 				"cell_type": "code",
@@ -92,7 +111,7 @@
 					"            .options(quote='\"') \\\r\n",
 					"            .load('/landing_zone/2019/Balanco-2019-Ligue180-Raça-cor da Vítima.csv')"
 				],
-				"execution_count": 3
+				"execution_count": null
 			},
 			{
 				"cell_type": "code",
@@ -116,7 +135,7 @@
 					"df = df.drop('None')\r\n",
 					"df = df.drop('Total')"
 				],
-				"execution_count": 4
+				"execution_count": null
 			},
 			{
 				"cell_type": "code",
@@ -142,7 +161,7 @@
 					"\r\n",
 					"df = df.fillna(0)"
 				],
-				"execution_count": 5
+				"execution_count": null
 			},
 			{
 				"cell_type": "code",
@@ -161,7 +180,7 @@
 					"# Escrever dados limpos em formato parque no azure storage\r\n",
 					"df.write.format('parquet').mode('overwrite').save('/history_zone/2019/RacaVitima/')"
 				],
-				"execution_count": 6
+				"execution_count": null
 			},
 			{
 				"cell_type": "code",
@@ -180,7 +199,7 @@
 					"df = spark.read.parquet('/history_zone/2019/RacaVitima/')\r\n",
 					"df.toPandas()"
 				],
-				"execution_count": 7
+				"execution_count": null
 			}
 		]
 	}

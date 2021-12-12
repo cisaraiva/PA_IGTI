@@ -4,7 +4,7 @@
 		"nbformat": 4,
 		"nbformat_minor": 2,
 		"bigDataPool": {
-			"referenceName": "tcccibele",
+			"referenceName": "tcccibele2",
 			"type": "BigDataPoolReference"
 		},
 		"sessionProperties": {
@@ -17,7 +17,7 @@
 				"spark.dynamicAllocation.enabled": "false",
 				"spark.dynamicAllocation.minExecutors": "2",
 				"spark.dynamicAllocation.maxExecutors": "2",
-				"spark.autotune.trackingId": "b65c3a3a-a572-4421-bc97-4bdfa132b7e4"
+				"spark.autotune.trackingId": "5659fc15-c9af-4c43-8441-4d8d9e276f03"
 			}
 		},
 		"metadata": {
@@ -31,10 +31,10 @@
 				"name": "python"
 			},
 			"a365ComputeOptions": {
-				"id": "/subscriptions/c2e7ea02-c1b2-4906-9c73-95c7b9e0b637/resourceGroups/TCC_Cibele/providers/Microsoft.Synapse/workspaces/tcccibele/bigDataPools/tcccibele",
-				"name": "tcccibele",
+				"id": "/subscriptions/3768861a-a3bf-47a5-a888-a7be0541a195/resourceGroups/tcc_cibele2/providers/Microsoft.Synapse/workspaces/tcccibele2/bigDataPools/tcccibele2",
+				"name": "tcccibele2",
 				"type": "Spark",
-				"endpoint": "https://tcccibele.dev.azuresynapse.net/livyApi/versions/2019-11-01-preview/sparkPools/tcccibele",
+				"endpoint": "https://tcccibele2.dev.azuresynapse.net/livyApi/versions/2019-11-01-preview/sparkPools/tcccibele2",
 				"auth": {
 					"type": "AAD",
 					"authResource": "https://dev.azuresynapse.net"
