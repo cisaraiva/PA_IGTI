@@ -17,7 +17,7 @@
 				"spark.dynamicAllocation.enabled": "false",
 				"spark.dynamicAllocation.minExecutors": "2",
 				"spark.dynamicAllocation.maxExecutors": "2",
-				"spark.autotune.trackingId": "68bdc6d6-2090-4525-8c5b-f3b0d22c1130"
+				"spark.autotune.trackingId": "aaf259f2-4b8e-4f2f-b15f-fb36c8c35be3"
 			}
 		},
 		"metadata": {
@@ -199,7 +199,7 @@
 					"df = spark.read.parquet('/history_zone/2019/RacaVitima/')\r\n",
 					"df.toPandas()"
 				],
-				"execution_count": null
+				"execution_count": 9
 			}
 		]
 	}
