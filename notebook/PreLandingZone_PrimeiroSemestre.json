@@ -17,7 +17,7 @@
 				"spark.dynamicAllocation.enabled": "false",
 				"spark.dynamicAllocation.minExecutors": "2",
 				"spark.dynamicAllocation.maxExecutors": "2",
-				"spark.autotune.trackingId": "5a2dede7-5edf-4b53-9bbc-b3213f6a828a"
+				"spark.autotune.trackingId": "93d19e72-13fb-4bb9-b6a6-f540b054d3d7"
 			}
 		},
 		"metadata": {
@@ -65,7 +65,7 @@
 					"import pandas\r\n",
 					"import pyspark.sql.functions as F"
 				],
-				"execution_count": 3
+				"execution_count": 6
 			},
 			{
 				"cell_type": "code",
@@ -86,13 +86,13 @@
 				},
 				"source": [
 					"%%pyspark\r\n",
-					"df = spark.read.load('abfss://datalake@datalaketcccibele2.dfs.core.windows.net/landing_zone/2020/primeiro_semestre_2020.csv'\r\n",
+					"df = spark.read.load('abfss://tcccibele2@tcccibele2.dfs.core.windows.net/landing_zone/2020/primeiro_semestre_2020.csv'\r\n",
 					"    ,format='csv'\r\n",
 					"    ,encoding='ISO-8859-1'\r\n",
 					")\r\n",
 					"display(df.limit(10))"
 				],
-				"execution_count": 5
+				"execution_count": 7
 			},
 			{
 				"cell_type": "code",
@@ -121,7 +121,7 @@
 					"df = df.withColumn('_c0', regexp_replace('_c0', 'VÍTIMA IDOSA;CRIANÇA;DEFICIENTE OU MINORIA ÉTNICA OU SOCIAL', \"VÍTIMA IDOSA,CRIANÇA,DEFICIENTE OU MINORIA ÉTNICA OU SOCIAL\"))\r\n",
 					""
 				],
-				"execution_count": null
+				"execution_count": 8
 			},
 			{
 				"cell_type": "code",
@@ -139,7 +139,7 @@
 				"source": [
 					"df.write.mode(\"overwrite\").csv(\"/landing_zone/2020/primeiro_semestre_2020_1.csv\", encoding='ISO-8859-1')"
 				],
-				"execution_count": null
+				"execution_count": 9
 			}
 		]
 	}
