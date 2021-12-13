@@ -4,7 +4,7 @@
 		"nbformat": 4,
 		"nbformat_minor": 2,
 		"bigDataPool": {
-			"referenceName": "tcccibele",
+			"referenceName": "tcccibele2",
 			"type": "BigDataPoolReference"
 		},
 		"sessionProperties": {
@@ -17,7 +17,7 @@
 				"spark.dynamicAllocation.enabled": "false",
 				"spark.dynamicAllocation.minExecutors": "2",
 				"spark.dynamicAllocation.maxExecutors": "2",
-				"spark.autotune.trackingId": "ddc9483f-d27e-4494-a6d4-828d6123c996"
+				"spark.autotune.trackingId": "69e8780d-28bb-4e15-900d-66a0288d1c9f"
 			}
 		},
 		"metadata": {
@@ -31,10 +31,10 @@
 				"name": "python"
 			},
 			"a365ComputeOptions": {
-				"id": "/subscriptions/c2e7ea02-c1b2-4906-9c73-95c7b9e0b637/resourceGroups/TCC_Cibele/providers/Microsoft.Synapse/workspaces/tcccibele/bigDataPools/tcccibele",
-				"name": "tcccibele",
+				"id": "/subscriptions/3768861a-a3bf-47a5-a888-a7be0541a195/resourceGroups/tcc_cibele2/providers/Microsoft.Synapse/workspaces/tcccibele2/bigDataPools/tcccibele2",
+				"name": "tcccibele2",
 				"type": "Spark",
-				"endpoint": "https://tcccibele.dev.azuresynapse.net/livyApi/versions/2019-11-01-preview/sparkPools/tcccibele",
+				"endpoint": "https://tcccibele2.dev.azuresynapse.net/livyApi/versions/2019-11-01-preview/sparkPools/tcccibele2",
 				"auth": {
 					"type": "AAD",
 					"authResource": "https://dev.azuresynapse.net"
@@ -60,7 +60,7 @@
 					"Suspeito = spark.read.parquet('/history_zone/2019/Suspeito/')\r\n",
 					"TipoViolacao = spark.read.parquet('/history_zone/2019/TipoViolacao/')"
 				],
-				"execution_count": 51
+				"execution_count": 1
 			},
 			{
 				"cell_type": "code",
@@ -85,7 +85,7 @@
 					"Suspeito.write.format('parquet').mode('overwrite').save('/consumer_zone/2019/Suspeito/')\r\n",
 					"TipoViolacao.write.format('parquet').mode('overwrite').save('/consumer_zone/2019/TipoViolacao/')"
 				],
-				"execution_count": 52
+				"execution_count": 2
 			},
 			{
 				"cell_type": "code",
@@ -104,7 +104,7 @@
 					"PrimeiroSemestre = spark.read.parquet('/history_zone/2020/PrimeiroSemestre/')\r\n",
 					"SegundoSemestre = spark.read.parquet('/history_zone/2020/SegundoSemestre/')"
 				],
-				"execution_count": 53
+				"execution_count": 3
 			},
 			{
 				"cell_type": "markdown",
@@ -135,7 +135,7 @@
 				"source": [
 					"PrimeiroSemestre = PrimeiroSemestre.select('Trimestre','Dia','TipoViolacao','GrupoVulneravel','EspecieViolacao','UF', \\\r\n",
 					"    'CanalAtendimento','Denunciante','Motivacao','CenarioViolacao', \\\r\n",
-					"    'SexoVitima','IdadeVitima','EscolaridadeVitima','RacaVitima','FaixaRendaVitima','Ano','Mes')\r\n",
+					"    'SexoVitima','Vitima_FaixaEtaria','EscolaridadeVitima','RacaVitima','FaixaRendaVitima','Ano','Mes')\r\n",
 					"\r\n",
 					"SegundoSemestre = SegundoSemestre.select('Trimestre','Dia','Categoria2','GrupoVulneravel','Categoria3','UF', \\\r\n",
 					"    'CanalAtendimento','Denunciante','Motivacao','CenarioViolacao', \\\r\n",
@@ -143,7 +143,7 @@
 					"\r\n",
 					"df2020 = PrimeiroSemestre.unionAll(SegundoSemestre)"
 				],
-				"execution_count": 54
+				"execution_count": 4
 			},
 			{
 				"cell_type": "code",
@@ -161,7 +161,7 @@
 				"source": [
 					"df2020.write.partitionBy(\"Ano\",\"Mes\").mode(\"overwrite\").parquet(\"/consumer_zone/2020/\")"
 				],
-				"execution_count": 55
+				"execution_count": 5
 			}
 		]
 	}
