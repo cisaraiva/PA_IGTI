@@ -17,7 +17,7 @@
 				"spark.dynamicAllocation.enabled": "false",
 				"spark.dynamicAllocation.minExecutors": "2",
 				"spark.dynamicAllocation.maxExecutors": "2",
-				"spark.autotune.trackingId": "274c1ba6-78fb-489e-9782-7ad4ee65d8b4"
+				"spark.autotune.trackingId": "e46f8c25-e262-4801-979a-d6c36de30a29"
 			}
 		},
 		"metadata": {
@@ -64,9 +64,10 @@
 				"source": [
 					"from pyspark.sql.types import StructField, StructType, IntegerType, StringType\r\n",
 					"from pyspark.sql import functions as f, column\r\n",
-					"import pandas as pd"
+					"import pandas as pd\r\n",
+					"import numpy"
 				],
-				"execution_count": 1
+				"execution_count": 51
 			},
 			{
 				"cell_type": "code",
@@ -131,6 +132,55 @@
 					"df.toPandas()"
 				],
 				"execution_count": 5
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"from pyspark.sql.functions import when\r\n",
+					"\r\n",
+					"df = df.withColumn(\"idade\", when(df.IdadeVitima_Tratada < 18,\"Abaixo de 18 anos\")\r\n",
+					"                                 .when((df.IdadeVitima_Tratada >= 18) & (df.IdadeVitima_Tratada <= 19),\"18 A 19 Anos\")\r\n",
+					"                                 .when((df.IdadeVitima_Tratada >= 20) & (df.IdadeVitima_Tratada <= 24),\"20 A 24 Anos\")\r\n",
+					"                                 .when((df.IdadeVitima_Tratada >= 25) & (df.IdadeVitima_Tratada <= 29),\"25 A 29 Anos\")\r\n",
+					"                                 .when((df.IdadeVitima_Tratada >= 30) & (df.IdadeVitima_Tratada <= 34),\"30 A 34 Anos\")\r\n",
+					"                                 .when((df.IdadeVitima_Tratada >= 35) & (df.IdadeVitima_Tratada <= 39),\"35 A 39 Anos\")\r\n",
+					"                                 .when((df.IdadeVitima_Tratada >= 40) & (df.IdadeVitima_Tratada <= 44),\"40 A 44 Anos\")\r\n",
+					"                                 .when((df.IdadeVitima_Tratada >= 45) & (df.IdadeVitima_Tratada <= 49),\"45 A 49 Anos\")\r\n",
+					"                                 .when((df.IdadeVitima_Tratada >= 50) & (df.IdadeVitima_Tratada <= 54),\"50 A 54 Anos\")\r\n",
+					"                                 .when((df.IdadeVitima_Tratada >= 55) & (df.IdadeVitima_Tratada <= 59),\"55 A 59 Anos\")\r\n",
+					"                                 .otherwise(None))\r\n",
+					""
+				],
+				"execution_count": 90
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"df.toPandas()"
+				],
+				"execution_count": 88
 			}
 		]
 	}
