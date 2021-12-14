@@ -1,0 +1,17 @@
+{
+	"name": "ano2020_Violencia",
+	"properties": {
+		"content": {
+			"query": "IF NOT EXISTS (SELECT * FROM sys.external_file_formats WHERE name = 'SynapseParquetFormat') \n\tCREATE EXTERNAL FILE FORMAT [SynapseParquetFormat] \n\tWITH ( FORMAT_TYPE = PARQUET)\nGO\n\nIF NOT EXISTS (SELECT * FROM sys.external_data_sources WHERE name = 'tcccibele2_tcccibele2_dfs_core_windows_net') \n\tCREATE EXTERNAL DATA SOURCE [tcccibele2_tcccibele2_dfs_core_windows_net] \n\tWITH (\n\t\tLOCATION = 'abfss://tcccibele2@tcccibele2.dfs.core.windows.net' \n\t)\nGO\n\nCREATE EXTERNAL TABLE [ano2020].[Violencia] (\n\t[Trimestre] nvarchar(500),\n\t[Dia] nvarchar(500),\n\t[TipoViolacao] nvarchar(500),\n\t[GrupoVulneravel] nvarchar(500),\n\t[EspecieViolacao] nvarchar(500),\n\t[UF] nvarchar(500),\n\t[CanalAtendimento] nvarchar(500),\n\t[Denunciante] nvarchar(500),\n\t[Motivacao] nvarchar(500),\n\t[CenarioViolacao] nvarchar(500),\n\t[SexoVitima] nvarchar(500),\n\t[Vitima_FaixaEtaria] nvarchar(500),\n\t[EscolaridadeVitima] nvarchar(500),\n\t[RacaVitima] nvarchar(500),\n\t[FaixaRendaVitima] nvarchar(500),\n\t[Data] date\n\t)\n\tWITH (\n\tLOCATION = 'consumer_zone/2020/Ano=2020',\n\tDATA_SOURCE = [tcccibele2_tcccibele2_dfs_core_windows_net],\n\tFILE_FORMAT = [SynapseParquetFormat]\n\t)\nGO\n\n\nSELECT TOP 100 * FROM [ano2020].[Violencia]\nGO",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "sqltcccibele",
+				"poolName": "sqltcccibele"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}
