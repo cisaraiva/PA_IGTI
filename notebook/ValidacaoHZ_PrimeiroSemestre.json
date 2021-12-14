@@ -17,7 +17,7 @@
 				"spark.dynamicAllocation.enabled": "false",
 				"spark.dynamicAllocation.minExecutors": "2",
 				"spark.dynamicAllocation.maxExecutors": "2",
-				"spark.autotune.trackingId": "e46f8c25-e262-4801-979a-d6c36de30a29"
+				"spark.autotune.trackingId": "5ecb372f-0082-4ac3-9bcd-c07a86951d28"
 			}
 		},
 		"metadata": {
@@ -67,7 +67,7 @@
 					"import pandas as pd\r\n",
 					"import numpy"
 				],
-				"execution_count": 51
+				"execution_count": 1
 			},
 			{
 				"cell_type": "code",

@@ -17,7 +17,7 @@
 				"spark.dynamicAllocation.enabled": "false",
 				"spark.dynamicAllocation.minExecutors": "2",
 				"spark.dynamicAllocation.maxExecutors": "2",
-				"spark.autotune.trackingId": "235399fb-0c73-4ce6-a870-ad3151288a39"
+				"spark.autotune.trackingId": "08125cf9-db21-4c92-913f-8ebfc3934243"
 			}
 		},
 		"metadata": {
@@ -226,12 +226,39 @@
 					}
 				},
 				"source": [
-					"# Limpar idade da vitima\r\n",
-					"#df = df.withColumn(\"IdadeVitima_Tratado\", f.regexp_replace(f.col(\"IdadeVitima\"), \"[^0-9]\", \"\"))\r\n",
-					"\r\n",
-					"#df = df.withColumn(\"IdadeSuspeito\", f.regexp_replace(f.col(\"IdadeSuspeito\"), \"[^0-9]\", \"\"))"
+					"df = df.withColumn(\"Mes_number\", when(df.Mes == \"Janeiro\" , 1)\r\n",
+					"                                 .when(df.Mes == \"Fevereiro\", 2)\r\n",
+					"                                 .when(df.Mes == \"Março\", 3)\r\n",
+					"                                 .when(df.Mes == \"Abril\", 4)\r\n",
+					"                                 .when(df.Mes == \"Maio\", 5)\r\n",
+					"                                 .when(df.Mes == \"Junho\", 6)\r\n",
+					"                                 .when(df.Mes == \"Julho\", 7)\r\n",
+					"                                 .when(df.Mes == \"Agosto\", 8)\r\n",
+					"                                 .when(df.Mes == \"Setembro\", 9)\r\n",
+					"                                 .when(df.Mes == \"Outubro\", 10)\r\n",
+					"                                 .when(df.Mes == \"Novembro\", 11)\r\n",
+					"                                 .when(df.Mes == \"Dezembro\", 12)\r\n",
+					"                                 .otherwise(None))"
 				],
 				"execution_count": 8
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"df = df.withColumn(\"Ano_number\", f.col('Ano'))"
+				],
+				"execution_count": null
 			},
 			{
 				"cell_type": "code",
