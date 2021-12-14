@@ -17,7 +17,7 @@
 				"spark.dynamicAllocation.enabled": "false",
 				"spark.dynamicAllocation.minExecutors": "2",
 				"spark.dynamicAllocation.maxExecutors": "2",
-				"spark.autotune.trackingId": "e7b52992-d78a-40ba-ad8a-ad7f9edae5eb"
+				"spark.autotune.trackingId": "015a6f0e-38e9-4053-82b2-d8f983a52ec1"
 			}
 		},
 		"metadata": {
@@ -241,7 +241,7 @@
 					"\r\n",
 					"dfAll.toPandas()"
 				],
-				"execution_count": null
+				"execution_count": 6
 			},
 			{
 				"cell_type": "code",
@@ -260,7 +260,7 @@
 					"# Escrever dados limpos em formato parque no azure storage\r\n",
 					"df.write.format('parquet').mode('overwrite').save('/history_zone/2019/TipoViolacao/')"
 				],
-				"execution_count": 6
+				"execution_count": 7
 			}
 		]
 	}
