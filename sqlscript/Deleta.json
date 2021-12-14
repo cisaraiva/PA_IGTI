@@ -1,0 +1,17 @@
+{
+	"name": "Deleta",
+	"properties": {
+		"content": {
+			"query": "DROP EXTERNAL TABLE [ano2019].[EscolaridadeVitima]\nGO\n\n\nDROP EXTERNAL TABLE [ano2019].[IdadeSuspeito]\nGO\n\n\nDROP EXTERNAL TABLE [ano2019].[IdadeVitima]\nGO\n\nDROP EXTERNAL TABLE [ano2019].[RacaSuspeito]\nGO\n\nDROP EXTERNAL TABLE [ano2019].[RacaVitima]\nGO\n\nDROP EXTERNAL TABLE [ano2019].[RelacaoVitimaSuspeito]\nGO\n\nDROP EXTERNAL TABLE [ano2019].[TipoViolacao]\nGO\n\nDROP EXTERNAL TABLE [ano2020].[Violencia]\nGO",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "sqltcccibele",
+				"poolName": "sqltcccibele"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}
