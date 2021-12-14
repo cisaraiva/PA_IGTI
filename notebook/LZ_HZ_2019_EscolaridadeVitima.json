@@ -17,7 +17,7 @@
 				"spark.dynamicAllocation.enabled": "false",
 				"spark.dynamicAllocation.minExecutors": "2",
 				"spark.dynamicAllocation.maxExecutors": "2",
-				"spark.autotune.trackingId": "5659fc15-c9af-4c43-8441-4d8d9e276f03"
+				"spark.autotune.trackingId": "66ae488f-ee48-443f-b715-5fa4b6654f0c"
 			}
 		},
 		"metadata": {
@@ -65,7 +65,7 @@
 					"from pyspark.sql.types import StructField, StructType, IntegerType, StringType\r\n",
 					"from pyspark.sql import functions as f"
 				],
-				"execution_count": 1
+				"execution_count": 26
 			},
 			{
 				"cell_type": "code",
@@ -89,7 +89,7 @@
 					"    StructField(\"Total\", StringType(), True)\r\n",
 					"])"
 				],
-				"execution_count": 2
+				"execution_count": 27
 			},
 			{
 				"cell_type": "code",
@@ -111,7 +111,7 @@
 					"            .options(quote='\"') \\\r\n",
 					"            .load('/landing_zone/2019/Balanco-2019-Ligue180-Escolaridade Vitima.csv')"
 				],
-				"execution_count": 3
+				"execution_count": 28
 			},
 			{
 				"cell_type": "code",
@@ -135,7 +135,7 @@
 					"df = df.drop('None')\r\n",
 					"df = df.drop('Total')"
 				],
-				"execution_count": 4
+				"execution_count": 29
 			},
 			{
 				"cell_type": "code",
@@ -161,7 +161,87 @@
 					"\r\n",
 					"df = df.fillna(0)"
 				],
-				"execution_count": 5
+				"execution_count": 30
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"#transforma colunas em linhas\r\n",
+					"\r\n",
+					"dfJan = df.select('EscolaridadeVitima','Janeiro')\r\n",
+					"dfJan = dfJan.withColumn(\"Data\", f.format_string(\"31-01-2019\"))\r\n",
+					"dfJan = dfJan.withColumnRenamed(\"Janeiro\",\"Total\")\r\n",
+					"\r\n",
+					"dfFev = df.select('EscolaridadeVitima','Fevereiro')\r\n",
+					"dfFev = dfJan.withColumn(\"Data\", f.format_string(\"28-02-2019\"))\r\n",
+					"dfFev = dfJan.withColumnRenamed(\"Fevereiro\",\"Total\")\r\n",
+					"\r\n",
+					"dfMar = df.select('EscolaridadeVitima','Março')\r\n",
+					"dfMar = dfJan.withColumn(\"Data\", f.format_string(\"31-03-2019\"))\r\n",
+					"dfMar = dfJan.withColumnRenamed(\"Março\",\"Total\")\r\n",
+					"\r\n",
+					"dfAbr = df.select('EscolaridadeVitima','Abril')\r\n",
+					"dfAbr = dfJan.withColumn(\"Data\", f.format_string(\"30-04-2019\"))\r\n",
+					"dfAbr = dfJan.withColumnRenamed(\"Abril\",\"Total\")\r\n",
+					"\r\n",
+					"dfMai = df.select('EscolaridadeVitima','Maio')\r\n",
+					"dfMai = dfJan.withColumn(\"Data\", f.format_string(\"31-05-2019\"))\r\n",
+					"dfMai = dfJan.withColumnRenamed(\"Maio\",\"Total\")\r\n",
+					"\r\n",
+					"dfJun = df.select('EscolaridadeVitima','Junho')\r\n",
+					"dfJun = dfJan.withColumn(\"Data\", f.format_string(\"30-06-2019\"))\r\n",
+					"dfJun = dfJan.withColumnRenamed(\"Junho\",\"Total\")\r\n",
+					"\r\n",
+					"dfJul = df.select('EscolaridadeVitima','Julho')\r\n",
+					"dfJul = dfJan.withColumn(\"Data\", f.format_string(\"31-07-2019\"))\r\n",
+					"dfJul = dfJan.withColumnRenamed(\"Julho\",\"Total\")\r\n",
+					"\r\n",
+					"dfAgo = df.select('EscolaridadeVitima','Agosto')\r\n",
+					"dfAgo = dfJan.withColumn(\"Data\", f.format_string(\"31-08-2019\"))\r\n",
+					"dfAgo = dfJan.withColumnRenamed(\"Agosto\",\"Total\")\r\n",
+					"\r\n",
+					"dfSet = df.select('EscolaridadeVitima','Setembro')\r\n",
+					"dfSet = dfJan.withColumn(\"Data\", f.format_string(\"30-09-2019\"))\r\n",
+					"dfSet = dfJan.withColumnRenamed(\"Setembro\",\"Total\")\r\n",
+					"\r\n",
+					"dfOut = df.select('EscolaridadeVitima','Outubro')\r\n",
+					"dfOut = dfJan.withColumn(\"Data\", f.format_string(\"31-10-2019\"))\r\n",
+					"dfOut = dfJan.withColumnRenamed(\"Outubro\",\"Total\")\r\n",
+					"\r\n",
+					"dfNov = df.select('EscolaridadeVitima','Novembro')\r\n",
+					"dfNov = dfJan.withColumn(\"Data\", f.format_string(\"30-11-2019\"))\r\n",
+					"dfNov = dfJan.withColumnRenamed(\"Novembro\",\"Total\")\r\n",
+					"\r\n",
+					"dfDez = df.select('EscolaridadeVitima','Dezembro')\r\n",
+					"dfDez = dfJan.withColumn(\"Data\", f.format_string(\"31-12-2019\"))\r\n",
+					"dfDez = dfJan.withColumnRenamed(\"Dezembro\",\"Total\")\r\n",
+					"\r\n",
+					"dfAll = dfJan.unionAll(dfFev)\r\n",
+					"dfAll = dfAll.unionAll(dfMar)\r\n",
+					"dfAll = dfAll.unionAll(dfAbr)\r\n",
+					"dfAll = dfAll.unionAll(dfMai)\r\n",
+					"dfAll = dfAll.unionAll(dfJun)\r\n",
+					"dfAll = dfAll.unionAll(dfJul)\r\n",
+					"dfAll = dfAll.unionAll(dfAgo)\r\n",
+					"dfAll = dfAll.unionAll(dfSet)\r\n",
+					"dfAll = dfAll.unionAll(dfOut)\r\n",
+					"dfAll = dfAll.unionAll(dfNov)\r\n",
+					"dfAll = dfAll.unionAll(dfDez)\r\n",
+					"\r\n",
+					"dfAll.toPandas()"
+				],
+				"execution_count": 31
 			},
 			{
 				"cell_type": "code",
@@ -180,26 +260,7 @@
 					"# Escrever dados limpos em formato parquet no azure storage\r\n",
 					"df.write.format('parquet').mode('overwrite').save('/history_zone/2019/EscolaridadeVitima/')"
 				],
-				"execution_count": 6
-			},
-			{
-				"cell_type": "code",
-				"metadata": {
-					"jupyter": {
-						"source_hidden": false,
-						"outputs_hidden": false
-					},
-					"nteract": {
-						"transient": {
-							"deleting": false
-						}
-					}
-				},
-				"source": [
-					"df = spark.read.parquet('/history_zone/2019/EscolaridadeVitima/')\r\n",
-					"df.toPandas()"
-				],
-				"execution_count": 7
+				"execution_count": 32
 			}
 		]
 	}
