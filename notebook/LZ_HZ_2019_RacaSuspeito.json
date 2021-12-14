@@ -17,7 +17,7 @@
 				"spark.dynamicAllocation.enabled": "false",
 				"spark.dynamicAllocation.minExecutors": "2",
 				"spark.dynamicAllocation.maxExecutors": "2",
-				"spark.autotune.trackingId": "539cf89c-69e8-4665-80c2-be9d850c5cb9"
+				"spark.autotune.trackingId": "0fed0691-fff1-4f6d-a640-a409f3b98efa"
 			}
 		},
 		"metadata": {
@@ -260,7 +260,7 @@
 					"# Escrever dados limpos em formato parque no azure storage\r\n",
 					"df.write.format('parquet').mode('overwrite').save('/history_zone/2019/RacaSuspeito/')"
 				],
-				"execution_count": null
+				"execution_count": 7
 			}
 		]
 	}
