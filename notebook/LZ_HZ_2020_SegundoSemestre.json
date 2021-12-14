@@ -17,7 +17,7 @@
 				"spark.dynamicAllocation.enabled": "false",
 				"spark.dynamicAllocation.minExecutors": "2",
 				"spark.dynamicAllocation.maxExecutors": "2",
-				"spark.autotune.trackingId": "ac01b21f-9165-4918-930b-cf8e12834d8c"
+				"spark.autotune.trackingId": "3866815a-93c7-484f-8fef-50d0527ac40e"
 			}
 		},
 		"metadata": {
@@ -66,7 +66,7 @@
 					"from pyspark.sql import functions as f\r\n",
 					"from pyspark.sql.functions import when"
 				],
-				"execution_count": 11
+				"execution_count": 1
 			},
 			{
 				"cell_type": "code",
@@ -103,7 +103,7 @@
 					"    StructField(\"Categoria6\", StringType(), True)\r\n",
 					"])"
 				],
-				"execution_count": 12
+				"execution_count": 2
 			},
 			{
 				"cell_type": "code",
@@ -125,7 +125,7 @@
 					"            .options(quote='\"', sep=';', encoding='ISO-8859-1') \\\r\n",
 					"            .load('/landing_zone/2020/segundo_semestre_2020_1.csv')"
 				],
-				"execution_count": 13
+				"execution_count": 3
 			},
 			{
 				"cell_type": "code",
@@ -144,7 +144,7 @@
 					"# Remover linhas nulas e header\r\n",
 					"df = df.where((df[0].isNotNull()) & (df[0] != 'Ano'))"
 				],
-				"execution_count": 14
+				"execution_count": 4
 			},
 			{
 				"cell_type": "code",
@@ -173,7 +173,7 @@
 					"\r\n",
 					"df = df.fillna(0)"
 				],
-				"execution_count": 15
+				"execution_count": 5
 			},
 			{
 				"cell_type": "code",
@@ -192,7 +192,7 @@
 					"# Filtrar apenas casos de violência contra a mulher.\r\n",
 					"df = df.where((df['GrupoVulneravel'] == '01. Outras Violencias Contra A Mulher') | (df['GrupoVulneravel'] == '02. Violência Doméstica E Familiar Contra A Mulher'))"
 				],
-				"execution_count": 16
+				"execution_count": 6
 			},
 			{
 				"cell_type": "code",
@@ -211,7 +211,7 @@
 					"# Filtrar apenas sexo da vitima feminino\r\n",
 					"df = df.where(df['SexoVitima'] == 'Feminino')"
 				],
-				"execution_count": 17
+				"execution_count": 7
 			},
 			{
 				"cell_type": "code",
@@ -227,21 +227,21 @@
 					}
 				},
 				"source": [
-					"df = df.withColumn(\"Mes_number\", when(df.Mes == \"Janeiro\" , 1)\r\n",
-					"                                 .when(df.Mes == \"Fevereiro\", 2)\r\n",
-					"                                 .when(df.Mes == \"Março\", 3)\r\n",
-					"                                 .when(df.Mes == \"Abril\", 4)\r\n",
-					"                                 .when(df.Mes == \"Maio\", 5)\r\n",
-					"                                 .when(df.Mes == \"Junho\", 6)\r\n",
-					"                                 .when(df.Mes == \"Julho\", 7)\r\n",
-					"                                 .when(df.Mes == \"Agosto\", 8)\r\n",
-					"                                 .when(df.Mes == \"Setembro\", 9)\r\n",
-					"                                 .when(df.Mes == \"Outubro\", 10)\r\n",
-					"                                 .when(df.Mes == \"Novembro\", 11)\r\n",
-					"                                 .when(df.Mes == \"Dezembro\", 12)\r\n",
+					"df = df.withColumn(\"Mes_number\", when(df.Mes == \"Janeiro\" , '01')\r\n",
+					"                                 .when(df.Mes == \"Fevereiro\", '02')\r\n",
+					"                                 .when(df.Mes == \"Março\", '03')\r\n",
+					"                                 .when(df.Mes == \"Abril\", '04')\r\n",
+					"                                 .when(df.Mes == \"Maio\", '05')\r\n",
+					"                                 .when(df.Mes == \"Junho\", '06')\r\n",
+					"                                 .when(df.Mes == \"Julho\", '07')\r\n",
+					"                                 .when(df.Mes == \"Agosto\", '08')\r\n",
+					"                                 .when(df.Mes == \"Setembro\", '09')\r\n",
+					"                                 .when(df.Mes == \"Outubro\", '10')\r\n",
+					"                                 .when(df.Mes == \"Novembro\", '11')\r\n",
+					"                                 .when(df.Mes == \"Dezembro\", '12')\r\n",
 					"                                 .otherwise(None))"
 				],
-				"execution_count": 18
+				"execution_count": 8
 			},
 			{
 				"cell_type": "code",
@@ -257,9 +257,12 @@
 					}
 				},
 				"source": [
-					"df = df.withColumn(\"Ano_number\", f.col('Ano'))"
+					"df = df.withColumn(\"Ano_number\", f.col('Ano'))\r\n",
+					"df = df.withColumn(\"Dia\", f.substring(f.expr(\"'00' || Dia\"),-2,2))\r\n",
+					"df = df.withColumn(\"Data\", f.concat_ws('-', f.col('Dia'), f.col('Mes_number'), f.col('Ano')))\r\n",
+					"df = df.withColumn(\"Data\", f.to_date(f.col(\"Data\"),\"dd-MM-yyyy\"))"
 				],
-				"execution_count": 19
+				"execution_count": 9
 			},
 			{
 				"cell_type": "code",
@@ -277,7 +280,7 @@
 				"source": [
 					"df.limit(3).toPandas()"
 				],
-				"execution_count": 20
+				"execution_count": 10
 			},
 			{
 				"cell_type": "code",
@@ -294,31 +297,9 @@
 				},
 				"source": [
 					"# Escrever dados limpos em formato parque no azure storage\r\n",
-					"#df.write.format('parquet').mode('overwrite').save('/history_zone/2020/PrimeiroSemestre/')\r\n",
-					"\r\n",
-					"df.write.partitionBy(\"Ano\",\"Mes\").mode(\"overwrite\").parquet(\"/history_zone/2020/SegundoSemestre/\")\r\n",
-					""
+					"df.write.partitionBy(\"Ano\",\"Mes\").mode(\"overwrite\").parquet(\"/history_zone/2020/SegundoSemestre/\")"
 				],
-				"execution_count": 21
-			},
-			{
-				"cell_type": "code",
-				"metadata": {
-					"jupyter": {
-						"source_hidden": false,
-						"outputs_hidden": false
-					},
-					"nteract": {
-						"transient": {
-							"deleting": false
-						}
-					}
-				},
-				"source": [
-					"df = spark.read.parquet('/history_zone/2020/SegundoSemestre/')\r\n",
-					"df.limit(3).toPandas()"
-				],
-				"execution_count": 22
+				"execution_count": 11
 			}
 		]
 	}
