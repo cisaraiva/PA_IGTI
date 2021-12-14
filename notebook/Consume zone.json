@@ -17,7 +17,7 @@
 				"spark.dynamicAllocation.enabled": "false",
 				"spark.dynamicAllocation.minExecutors": "2",
 				"spark.dynamicAllocation.maxExecutors": "2",
-				"spark.autotune.trackingId": "f18578df-7f4a-4eae-a5d4-c6ce6e2f30fe"
+				"spark.autotune.trackingId": "a5cdb885-02fa-4b35-9857-5c18a35b91be"
 			}
 		},
 		"metadata": {
@@ -60,7 +60,7 @@
 					"Suspeito = spark.read.parquet('/history_zone/2019/Suspeito/')\r\n",
 					"TipoViolacao = spark.read.parquet('/history_zone/2019/TipoViolacao/')"
 				],
-				"execution_count": 1
+				"execution_count": 6
 			},
 			{
 				"cell_type": "code",
@@ -85,7 +85,7 @@
 					"Suspeito.write.format('parquet').mode('overwrite').save('/consumer_zone/2019/Suspeito/')\r\n",
 					"TipoViolacao.write.format('parquet').mode('overwrite').save('/consumer_zone/2019/TipoViolacao/')"
 				],
-				"execution_count": 2
+				"execution_count": 7
 			},
 			{
 				"cell_type": "code",
@@ -104,7 +104,7 @@
 					"PrimeiroSemestre = spark.read.parquet('/history_zone/2020/PrimeiroSemestre/')\r\n",
 					"SegundoSemestre = spark.read.parquet('/history_zone/2020/SegundoSemestre/')"
 				],
-				"execution_count": 3
+				"execution_count": 8
 			},
 			{
 				"cell_type": "markdown",
@@ -135,15 +135,15 @@
 				"source": [
 					"PrimeiroSemestre = PrimeiroSemestre.select('Trimestre','Dia','TipoViolacao','GrupoVulneravel','EspecieViolacao','UF', \\\r\n",
 					"    'CanalAtendimento','Denunciante','Motivacao','CenarioViolacao', \\\r\n",
-					"    'SexoVitima','Vitima_FaixaEtaria','EscolaridadeVitima','RacaVitima','FaixaRendaVitima','Ano','Mes''Ano_number','Mes_number')\r\n",
+					"    'SexoVitima','Vitima_FaixaEtaria','EscolaridadeVitima','RacaVitima','FaixaRendaVitima','Ano','Mes','Ano_number','Mes_number')\r\n",
 					"\r\n",
-					"SegundoSemestre = SegundoSemestre.select('Trimestre','Dia','Categoria2','GrupoVulneravel','Categoria3','UF', \\\r\n",
-					"    'CanalAtendimento','Denunciante','Motivacao','CenarioViolacao', \\\r\n",
-					"    'SexoVitima','IdadeVitima','EscolaridadeVitima','RacaVitima','FaixaRendaVitima','Ano','Mes','Ano_number','Mes_number')\r\n",
+					"#SegundoSemestre = SegundoSemestre.select('Trimestre','Dia','Categoria2','GrupoVulneravel','Categoria3','UF', \\\r\n",
+					"#    'CanalAtendimento','Denunciante','Motivacao','CenarioViolacao', \\\r\n",
+					"#    'SexoVitima','IdadeVitima','EscolaridadeVitima','RacaVitima','FaixaRendaVitima','Ano','Mes','Ano_number','Mes_number')\r\n",
 					"\r\n",
-					"df2020 = PrimeiroSemestre.unionAll(SegundoSemestre)"
+					"#df2020 = PrimeiroSemestre.unionAll(SegundoSemestre)"
 				],
-				"execution_count": 4
+				"execution_count": 11
 			},
 			{
 				"cell_type": "code",
@@ -161,7 +161,7 @@
 				"source": [
 					"df2020.write.partitionBy(\"Ano\",\"Mes\").mode(\"overwrite\").parquet(\"/consumer_zone/2020/\")"
 				],
-				"execution_count": 5
+				"execution_count": null
 			}
 		]
 	}
