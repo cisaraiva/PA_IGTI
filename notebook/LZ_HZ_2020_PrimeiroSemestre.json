@@ -17,7 +17,7 @@
 				"spark.dynamicAllocation.enabled": "false",
 				"spark.dynamicAllocation.minExecutors": "2",
 				"spark.dynamicAllocation.maxExecutors": "2",
-				"spark.autotune.trackingId": "e384cd49-bad4-45bb-8ab5-d920cc0bc977"
+				"spark.autotune.trackingId": "5b14cfb4-0101-41ce-a40b-61bc2f5e9f49"
 			}
 		},
 		"metadata": {
@@ -67,7 +67,7 @@
 					"import pandas as pd\r\n",
 					"from pyspark.sql.functions import when"
 				],
-				"execution_count": 16
+				"execution_count": 19
 			},
 			{
 				"cell_type": "code",
@@ -109,7 +109,7 @@
 					"    StructField(\"DeficienciaSuspeito\", StringType(), True)\r\n",
 					"])"
 				],
-				"execution_count": 17
+				"execution_count": 20
 			},
 			{
 				"cell_type": "code",
@@ -131,7 +131,7 @@
 					"            .options(sep=';', encoding='ISO-8859-1') \\\r\n",
 					"            .load('/landing_zone/2020/primeiro_semestre_2020_1.csv')"
 				],
-				"execution_count": 18
+				"execution_count": 21
 			},
 			{
 				"cell_type": "code",
@@ -150,7 +150,7 @@
 					"# Remover linhas nulas e header\r\n",
 					"df = df.where((df[0].isNotNull()) & (df[0] != 'Ano'))"
 				],
-				"execution_count": 19
+				"execution_count": 22
 			},
 			{
 				"cell_type": "code",
@@ -168,7 +168,7 @@
 				"source": [
 					"df.limit(3).toPandas()"
 				],
-				"execution_count": 20
+				"execution_count": 23
 			},
 			{
 				"cell_type": "code",
@@ -196,7 +196,7 @@
 					"\r\n",
 					"df = df.fillna(0)"
 				],
-				"execution_count": 21
+				"execution_count": 24
 			},
 			{
 				"cell_type": "code",
@@ -214,7 +214,7 @@
 				"source": [
 					"df = df.where((df['GrupoVulneravel'] == '1-violência Contra A Mulher') | (df['GrupoVulneravel'] == '2-violência Doméstica E Familiar Contra A Mulher'))"
 				],
-				"execution_count": 22
+				"execution_count": 25
 			},
 			{
 				"cell_type": "code",
@@ -233,7 +233,7 @@
 					"#Filtrar apenas vitima do sexo feminino\r\n",
 					"df = df.where(df['SexoVitima'] == 'Feminino')"
 				],
-				"execution_count": 23
+				"execution_count": 26
 			},
 			{
 				"cell_type": "code",
@@ -255,7 +255,7 @@
 					"\r\n",
 					"df = df.withColumn(\"IdadeSuspeito_Tratada\", f.regexp_replace(f.col(\"IdadeSuspeito\"), \"[^0-9]\", \"\"))"
 				],
-				"execution_count": 24
+				"execution_count": 27
 			},
 			{
 				"cell_type": "code",
@@ -273,7 +273,7 @@
 				"source": [
 					"#df.groupBy(df['GrupoVulneravel']).count().orderBy(df['GrupoVulneravel']).toPandas()"
 				],
-				"execution_count": 25
+				"execution_count": 28
 			},
 			{
 				"cell_type": "code",
@@ -302,7 +302,55 @@
 					"                                 .otherwise(None))\r\n",
 					""
 				],
-				"execution_count": 26
+				"execution_count": 29
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"df = df.withColumn(\"Mes_number\", when(df.Mes == \"Janeiro\" , 1)\r\n",
+					"                                 .when(df.Mes == \"Fevereiro\", 2)\r\n",
+					"                                 .when(df.Mes == \"Março\", 3)\r\n",
+					"                                 .when(df.Mes == \"Abril\", 4)\r\n",
+					"                                 .when(df.Mes == \"Maio\", 5)\r\n",
+					"                                 .when(df.Mes == \"Junho\", 6)\r\n",
+					"                                 .when(df.Mes == \"Julho\", 7)\r\n",
+					"                                 .when(df.Mes == \"Agosto\", 8)\r\n",
+					"                                 .when(df.Mes == \"Setembro\", 9)\r\n",
+					"                                 .when(df.Mes == \"Outubro\", 10)\r\n",
+					"                                 .when(df.Mes == \"Novembro\", 11)\r\n",
+					"                                 .when(df.Mes == \"Dezembro\", 12)\r\n",
+					"                                 .otherwise(None))"
+				],
+				"execution_count": 30
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"df = df.withColumn(\"Ano_number\", f.col('Ano'))"
+				],
+				"execution_count": 31
 			},
 			{
 				"cell_type": "code",
@@ -321,7 +369,7 @@
 					"# Escrever dados limpos em formato parque no azure storage\r\n",
 					"df.write.partitionBy(\"Ano\",\"Mes\").mode(\"overwrite\").parquet(\"/history_zone/2020/PrimeiroSemestre/\")"
 				],
-				"execution_count": 27
+				"execution_count": 32
 			},
 			{
 				"cell_type": "code",
@@ -340,7 +388,7 @@
 					"df = spark.read.parquet('/history_zone/2020/PrimeiroSemestre/')\r\n",
 					"df.limit(3).toPandas()"
 				],
-				"execution_count": 28
+				"execution_count": 33
 			},
 			{
 				"cell_type": "code",
@@ -363,7 +411,7 @@
 					"#df.select('Vitima_FaixaEtaria').distinct().toPandas()\r\n",
 					"df.groupBy(df['Vitima_FaixaEtaria']).count().orderBy(df['Vitima_FaixaEtaria']).toPandas()"
 				],
-				"execution_count": 32
+				"execution_count": 34
 			}
 		]
 	}
