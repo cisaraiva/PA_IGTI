@@ -17,7 +17,7 @@
 				"spark.dynamicAllocation.enabled": "false",
 				"spark.dynamicAllocation.minExecutors": "2",
 				"spark.dynamicAllocation.maxExecutors": "2",
-				"spark.autotune.trackingId": "9ee68887-c089-41e9-8ce9-345cf40bae90"
+				"spark.autotune.trackingId": "ac01b21f-9165-4918-930b-cf8e12834d8c"
 			}
 		},
 		"metadata": {
@@ -63,9 +63,10 @@
 				},
 				"source": [
 					"from pyspark.sql.types import StructField, StructType, IntegerType, StringType\r\n",
-					"from pyspark.sql import functions as f"
+					"from pyspark.sql import functions as f\r\n",
+					"from pyspark.sql.functions import when"
 				],
-				"execution_count": 1
+				"execution_count": 11
 			},
 			{
 				"cell_type": "code",
@@ -102,7 +103,7 @@
 					"    StructField(\"Categoria6\", StringType(), True)\r\n",
 					"])"
 				],
-				"execution_count": 2
+				"execution_count": 12
 			},
 			{
 				"cell_type": "code",
@@ -124,7 +125,7 @@
 					"            .options(quote='\"', sep=';', encoding='ISO-8859-1') \\\r\n",
 					"            .load('/landing_zone/2020/segundo_semestre_2020_1.csv')"
 				],
-				"execution_count": 3
+				"execution_count": 13
 			},
 			{
 				"cell_type": "code",
@@ -143,7 +144,7 @@
 					"# Remover linhas nulas e header\r\n",
 					"df = df.where((df[0].isNotNull()) & (df[0] != 'Ano'))"
 				],
-				"execution_count": 4
+				"execution_count": 14
 			},
 			{
 				"cell_type": "code",
@@ -172,7 +173,7 @@
 					"\r\n",
 					"df = df.fillna(0)"
 				],
-				"execution_count": 5
+				"execution_count": 15
 			},
 			{
 				"cell_type": "code",
@@ -191,7 +192,7 @@
 					"# Filtrar apenas casos de violência contra a mulher.\r\n",
 					"df = df.where((df['GrupoVulneravel'] == '01. Outras Violencias Contra A Mulher') | (df['GrupoVulneravel'] == '02. Violência Doméstica E Familiar Contra A Mulher'))"
 				],
-				"execution_count": 6
+				"execution_count": 16
 			},
 			{
 				"cell_type": "code",
@@ -210,7 +211,7 @@
 					"# Filtrar apenas sexo da vitima feminino\r\n",
 					"df = df.where(df['SexoVitima'] == 'Feminino')"
 				],
-				"execution_count": 7
+				"execution_count": 17
 			},
 			{
 				"cell_type": "code",
@@ -240,7 +241,7 @@
 					"                                 .when(df.Mes == \"Dezembro\", 12)\r\n",
 					"                                 .otherwise(None))"
 				],
-				"execution_count": 8
+				"execution_count": 18
 			},
 			{
 				"cell_type": "code",
@@ -258,7 +259,7 @@
 				"source": [
 					"df = df.withColumn(\"Ano_number\", f.col('Ano'))"
 				],
-				"execution_count": null
+				"execution_count": 19
 			},
 			{
 				"cell_type": "code",
@@ -276,7 +277,7 @@
 				"source": [
 					"df.limit(3).toPandas()"
 				],
-				"execution_count": null
+				"execution_count": 20
 			},
 			{
 				"cell_type": "code",
@@ -298,7 +299,7 @@
 					"df.write.partitionBy(\"Ano\",\"Mes\").mode(\"overwrite\").parquet(\"/history_zone/2020/SegundoSemestre/\")\r\n",
 					""
 				],
-				"execution_count": null
+				"execution_count": 21
 			},
 			{
 				"cell_type": "code",
@@ -317,7 +318,7 @@
 					"df = spark.read.parquet('/history_zone/2020/SegundoSemestre/')\r\n",
 					"df.limit(3).toPandas()"
 				],
-				"execution_count": null
+				"execution_count": 22
 			}
 		]
 	}
