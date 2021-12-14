@@ -17,7 +17,7 @@
 				"spark.dynamicAllocation.enabled": "false",
 				"spark.dynamicAllocation.minExecutors": "2",
 				"spark.dynamicAllocation.maxExecutors": "2",
-				"spark.autotune.trackingId": "69e8780d-28bb-4e15-900d-66a0288d1c9f"
+				"spark.autotune.trackingId": "f18578df-7f4a-4eae-a5d4-c6ce6e2f30fe"
 			}
 		},
 		"metadata": {
@@ -135,11 +135,11 @@
 				"source": [
 					"PrimeiroSemestre = PrimeiroSemestre.select('Trimestre','Dia','TipoViolacao','GrupoVulneravel','EspecieViolacao','UF', \\\r\n",
 					"    'CanalAtendimento','Denunciante','Motivacao','CenarioViolacao', \\\r\n",
-					"    'SexoVitima','Vitima_FaixaEtaria','EscolaridadeVitima','RacaVitima','FaixaRendaVitima','Ano','Mes')\r\n",
+					"    'SexoVitima','Vitima_FaixaEtaria','EscolaridadeVitima','RacaVitima','FaixaRendaVitima','Ano','Mes''Ano_number','Mes_number')\r\n",
 					"\r\n",
 					"SegundoSemestre = SegundoSemestre.select('Trimestre','Dia','Categoria2','GrupoVulneravel','Categoria3','UF', \\\r\n",
 					"    'CanalAtendimento','Denunciante','Motivacao','CenarioViolacao', \\\r\n",
-					"    'SexoVitima','IdadeVitima','EscolaridadeVitima','RacaVitima','FaixaRendaVitima','Ano','Mes')\r\n",
+					"    'SexoVitima','IdadeVitima','EscolaridadeVitima','RacaVitima','FaixaRendaVitima','Ano','Mes','Ano_number','Mes_number')\r\n",
 					"\r\n",
 					"df2020 = PrimeiroSemestre.unionAll(SegundoSemestre)"
 				],
