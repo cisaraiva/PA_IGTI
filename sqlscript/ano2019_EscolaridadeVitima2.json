@@ -1,0 +1,17 @@
+{
+	"name": "ano2019_EscolaridadeVitima2",
+	"properties": {
+		"content": {
+			"query": "IF NOT EXISTS (SELECT * FROM sys.external_file_formats WHERE name = 'SynapseParquetFormat') \n\tCREATE EXTERNAL FILE FORMAT [SynapseParquetFormat] \n\tWITH ( FORMAT_TYPE = PARQUET)\nGO\n\nIF NOT EXISTS (SELECT * FROM sys.external_data_sources WHERE name = 'tcccibele2_tcccibele2_dfs_core_windows_net') \n\tCREATE EXTERNAL DATA SOURCE [tcccibele2_tcccibele2_dfs_core_windows_net] \n\tWITH (\n\t\tLOCATION = 'abfss://tcccibele2@tcccibele2.dfs.core.windows.net' \n\t)\nGO\n\nCREATE EXTERNAL TABLE [ano2019].[EscolaridadeVitima] (\n\t[EscolaridadeVitima] nvarchar(300),\n\t[Total] int,\n\t[Data] nvarchar(300)\n\t)\n\tWITH (\n\tLOCATION = 'consumer_zone/2019/EscolaridadeVitima',\n\tDATA_SOURCE = [tcccibele2_tcccibele2_dfs_core_windows_net],\n\tFILE_FORMAT = [SynapseParquetFormat]\n\t)\nGO\n\n\nSELECT TOP 100 * FROM [ano2019].[EscolaridadeVitima]\nGO",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "sqltcccibele",
+				"poolName": "sqltcccibele"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}
