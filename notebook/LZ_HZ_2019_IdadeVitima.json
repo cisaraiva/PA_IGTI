@@ -17,7 +17,7 @@
 				"spark.dynamicAllocation.enabled": "false",
 				"spark.dynamicAllocation.minExecutors": "2",
 				"spark.dynamicAllocation.maxExecutors": "2",
-				"spark.autotune.trackingId": "a6fb63d4-3c7f-4ff2-aba1-6a4404d10cda"
+				"spark.autotune.trackingId": "ad80ca01-4b92-47ba-b12f-f0ac983fe6e0"
 			}
 		},
 		"metadata": {
@@ -258,7 +258,7 @@
 				},
 				"source": [
 					"# Escrever dados limpos em formato parque no azure storage\r\n",
-					"df.write.format('parquet').mode('overwrite').save('/history_zone/2019/IdadeVitima/')"
+					"dfAll.write.format('parquet').mode('overwrite').save('/history_zone/2019/IdadeVitima/')"
 				],
 				"execution_count": 7
 			}

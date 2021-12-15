@@ -17,7 +17,7 @@
 				"spark.dynamicAllocation.enabled": "false",
 				"spark.dynamicAllocation.minExecutors": "2",
 				"spark.dynamicAllocation.maxExecutors": "2",
-				"spark.autotune.trackingId": "f8d5d728-778e-408f-83ed-7f2e9729c80e"
+				"spark.autotune.trackingId": "f31e795d-05bc-4e0c-a477-137fa5e74149"
 			}
 		},
 		"metadata": {
@@ -258,7 +258,7 @@
 				},
 				"source": [
 					"# Escrever dados limpos em formato parque no azure storage\r\n",
-					"df.write.format('parquet').mode('overwrite').save('/history_zone/2019/Suspeito/')"
+					"dfAll.write.format('parquet').mode('overwrite').save('/history_zone/2019/Suspeito/')"
 				],
 				"execution_count": 8
 			}

@@ -17,7 +17,7 @@
 				"spark.dynamicAllocation.enabled": "false",
 				"spark.dynamicAllocation.minExecutors": "2",
 				"spark.dynamicAllocation.maxExecutors": "2",
-				"spark.autotune.trackingId": "e616d85c-a0d5-45f5-8a3f-92ee07715b4b"
+				"spark.autotune.trackingId": "b1f4cc27-5322-47e4-81db-1eadca910d1c"
 			}
 		},
 		"metadata": {
@@ -258,7 +258,7 @@
 				},
 				"source": [
 					"# Escrever dados limpos em formato parque no azure storage\r\n",
-					"df.write.format('parquet').mode('overwrite').save('/history_zone/2019/RacaVitima/')"
+					"dfAll.write.format('parquet').mode('overwrite').save('/history_zone/2019/RacaVitima/')"
 				],
 				"execution_count": 7
 			}
