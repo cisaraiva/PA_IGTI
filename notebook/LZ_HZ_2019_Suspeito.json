@@ -17,7 +17,7 @@
 				"spark.dynamicAllocation.enabled": "false",
 				"spark.dynamicAllocation.minExecutors": "2",
 				"spark.dynamicAllocation.maxExecutors": "2",
-				"spark.autotune.trackingId": "4208e9e6-0437-4dd9-896a-3ce2d3c25442"
+				"spark.autotune.trackingId": "8a6b5598-8fab-4902-99cd-73c7d033c015"
 			}
 		},
 		"metadata": {
@@ -65,7 +65,7 @@
 					"from pyspark.sql.types import StructField, StructType, IntegerType, StringType\r\n",
 					"from pyspark.sql import functions as f"
 				],
-				"execution_count": 9
+				"execution_count": 1
 			},
 			{
 				"cell_type": "code",
@@ -89,7 +89,7 @@
 					"    StructField(\"Total\", StringType(), True)\r\n",
 					"])"
 				],
-				"execution_count": 10
+				"execution_count": 2
 			},
 			{
 				"cell_type": "code",
@@ -111,7 +111,7 @@
 					"            .options(quote='\"') \\\r\n",
 					"            .load('/landing_zone/2019/Balanco-2019-Ligue180-Suspeito.csv')"
 				],
-				"execution_count": 11
+				"execution_count": 3
 			},
 			{
 				"cell_type": "code",
@@ -135,7 +135,7 @@
 					"df = df.drop('None')\r\n",
 					"df = df.drop('Total')"
 				],
-				"execution_count": 12
+				"execution_count": 4
 			},
 			{
 				"cell_type": "code",
@@ -161,7 +161,7 @@
 					"\r\n",
 					"df = df.fillna(0)"
 				],
-				"execution_count": 13
+				"execution_count": 5
 			},
 			{
 				"cell_type": "code",
@@ -184,48 +184,48 @@
 					"dfJan = dfJan.withColumnRenamed(\"Janeiro\",\"Total\")\r\n",
 					"\r\n",
 					"dfFev = df.select('Suspeito','Fevereiro')\r\n",
-					"dfFev = dfJan.withColumn(\"Data\", f.format_string(\"28-02-2019\"))\r\n",
-					"dfFev = dfJan.withColumnRenamed(\"Fevereiro\",\"Total\")\r\n",
+					"dfFev = dfFev.withColumn(\"Data\", f.format_string(\"28-02-2019\"))\r\n",
+					"dfFev = dfFev.withColumnRenamed(\"Fevereiro\",\"Total\")\r\n",
 					"\r\n",
 					"dfMar = df.select('Suspeito','Março')\r\n",
-					"dfMar = dfJan.withColumn(\"Data\", f.format_string(\"31-03-2019\"))\r\n",
-					"dfMar = dfJan.withColumnRenamed(\"Março\",\"Total\")\r\n",
+					"dfMar = dfMar.withColumn(\"Data\", f.format_string(\"31-03-2019\"))\r\n",
+					"dfMar = dfMar.withColumnRenamed(\"Março\",\"Total\")\r\n",
 					"\r\n",
 					"dfAbr = df.select('Suspeito','Abril')\r\n",
-					"dfAbr = dfJan.withColumn(\"Data\", f.format_string(\"30-04-2019\"))\r\n",
-					"dfAbr = dfJan.withColumnRenamed(\"Abril\",\"Total\")\r\n",
+					"dfAbr = dfAbr.withColumn(\"Data\", f.format_string(\"30-04-2019\"))\r\n",
+					"dfAbr = dfAbr.withColumnRenamed(\"Abril\",\"Total\")\r\n",
 					"\r\n",
 					"dfMai = df.select('Suspeito','Maio')\r\n",
-					"dfMai = dfJan.withColumn(\"Data\", f.format_string(\"31-05-2019\"))\r\n",
-					"dfMai = dfJan.withColumnRenamed(\"Maio\",\"Total\")\r\n",
+					"dfMai = dfMai.withColumn(\"Data\", f.format_string(\"31-05-2019\"))\r\n",
+					"dfMai = dfMai.withColumnRenamed(\"Maio\",\"Total\")\r\n",
 					"\r\n",
 					"dfJun = df.select('Suspeito','Junho')\r\n",
-					"dfJun = dfJan.withColumn(\"Data\", f.format_string(\"30-06-2019\"))\r\n",
-					"dfJun = dfJan.withColumnRenamed(\"Junho\",\"Total\")\r\n",
+					"dfJun = dfJun.withColumn(\"Data\", f.format_string(\"30-06-2019\"))\r\n",
+					"dfJun = dfJun.withColumnRenamed(\"Junho\",\"Total\")\r\n",
 					"\r\n",
 					"dfJul = df.select('Suspeito','Julho')\r\n",
-					"dfJul = dfJan.withColumn(\"Data\", f.format_string(\"31-07-2019\"))\r\n",
-					"dfJul = dfJan.withColumnRenamed(\"Julho\",\"Total\")\r\n",
+					"dfJul = dfJul.withColumn(\"Data\", f.format_string(\"31-07-2019\"))\r\n",
+					"dfJul = dfJul.withColumnRenamed(\"Julho\",\"Total\")\r\n",
 					"\r\n",
 					"dfAgo = df.select('Suspeito','Agosto')\r\n",
-					"dfAgo = dfJan.withColumn(\"Data\", f.format_string(\"31-08-2019\"))\r\n",
-					"dfAgo = dfJan.withColumnRenamed(\"Agosto\",\"Total\")\r\n",
+					"dfAgo = dfAgo.withColumn(\"Data\", f.format_string(\"31-08-2019\"))\r\n",
+					"dfAgo = dfAgo.withColumnRenamed(\"Agosto\",\"Total\")\r\n",
 					"\r\n",
 					"dfSet = df.select('Suspeito','Setembro')\r\n",
-					"dfSet = dfJan.withColumn(\"Data\", f.format_string(\"30-09-2019\"))\r\n",
-					"dfSet = dfJan.withColumnRenamed(\"Setembro\",\"Total\")\r\n",
+					"dfSet = dfSet.withColumn(\"Data\", f.format_string(\"30-09-2019\"))\r\n",
+					"dfSet = dfSet.withColumnRenamed(\"Setembro\",\"Total\")\r\n",
 					"\r\n",
 					"dfOut = df.select('Suspeito','Outubro')\r\n",
-					"dfOut = dfJan.withColumn(\"Data\", f.format_string(\"31-10-2019\"))\r\n",
-					"dfOut = dfJan.withColumnRenamed(\"Outubro\",\"Total\")\r\n",
+					"dfOut = dfOut.withColumn(\"Data\", f.format_string(\"31-10-2019\"))\r\n",
+					"dfOut = dfOut.withColumnRenamed(\"Outubro\",\"Total\")\r\n",
 					"\r\n",
 					"dfNov = df.select('Suspeito','Novembro')\r\n",
-					"dfNov = dfJan.withColumn(\"Data\", f.format_string(\"30-11-2019\"))\r\n",
-					"dfNov = dfJan.withColumnRenamed(\"Novembro\",\"Total\")\r\n",
+					"dfNov = dfNov.withColumn(\"Data\", f.format_string(\"30-11-2019\"))\r\n",
+					"dfNov = dfNov.withColumnRenamed(\"Novembro\",\"Total\")\r\n",
 					"\r\n",
 					"dfDez = df.select('Suspeito','Dezembro')\r\n",
-					"dfDez = dfJan.withColumn(\"Data\", f.format_string(\"31-12-2019\"))\r\n",
-					"dfDez = dfJan.withColumnRenamed(\"Dezembro\",\"Total\")\r\n",
+					"dfDez = dfDez.withColumn(\"Data\", f.format_string(\"31-12-2019\"))\r\n",
+					"dfDez = dfDez.withColumnRenamed(\"Dezembro\",\"Total\")\r\n",
 					"\r\n",
 					"dfAll = dfJan.unionAll(dfFev)\r\n",
 					"dfAll = dfAll.unionAll(dfMar)\r\n",
@@ -241,7 +241,7 @@
 					"\r\n",
 					"dfAll.toPandas()"
 				],
-				"execution_count": 14
+				"execution_count": 6
 			},
 			{
 				"cell_type": "code",
@@ -260,7 +260,7 @@
 					"# Escrever dados limpos em formato parque no azure storage\r\n",
 					"dfAll.write.format('parquet').mode('overwrite').save('/history_zone/2019/Suspeito/')"
 				],
-				"execution_count": 15
+				"execution_count": 7
 			}
 		]
 	}
