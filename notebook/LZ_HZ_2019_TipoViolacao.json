@@ -17,7 +17,7 @@
 				"spark.dynamicAllocation.enabled": "false",
 				"spark.dynamicAllocation.minExecutors": "2",
 				"spark.dynamicAllocation.maxExecutors": "2",
-				"spark.autotune.trackingId": "8e16556d-6e87-4cd1-a411-ad72947f19cd"
+				"spark.autotune.trackingId": "dffdab53-64b7-48bf-aff4-7f309e46afb5"
 			}
 		},
 		"metadata": {
@@ -260,7 +260,7 @@
 					"# Escrever dados limpos em formato parque no azure storage\r\n",
 					"dfAll.write.format('parquet').mode('overwrite').save('/history_zone/2019/TipoViolacao/')"
 				],
-				"execution_count": null
+				"execution_count": 8
 			}
 		]
 	}
