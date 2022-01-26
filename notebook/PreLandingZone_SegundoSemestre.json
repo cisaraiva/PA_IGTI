@@ -17,7 +17,7 @@
 				"spark.dynamicAllocation.enabled": "false",
 				"spark.dynamicAllocation.minExecutors": "2",
 				"spark.dynamicAllocation.maxExecutors": "2",
-				"spark.autotune.trackingId": "0454d084-c3d5-42c4-aa4d-e78bdfab466e"
+				"spark.autotune.trackingId": "48294c1a-68e3-4f01-b2a3-63df90124af0"
 			}
 		},
 		"metadata": {
@@ -86,13 +86,13 @@
 				},
 				"source": [
 					"%%pyspark\r\n",
-					"df = spark.read.load('abfss://tcccibele2@tcccibele2.dfs.core.windows.net/landing_zone/2020/segundo_semestre_2020.csv'\r\n",
+					"df = spark.read.load('/landing_zone/2020/segundo_semestre_2020.csv'\r\n",
 					"    ,format='csv'\r\n",
 					"    ,encoding='ISO-8859-1'\r\n",
 					")\r\n",
-					"display(df.limit(10))"
+					"#display(df.limit(10))"
 				],
-				"execution_count": 2
+				"execution_count": 4
 			},
 			{
 				"cell_type": "code",
