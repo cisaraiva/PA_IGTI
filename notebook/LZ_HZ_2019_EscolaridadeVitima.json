@@ -4,7 +4,7 @@
 		"nbformat": 4,
 		"nbformat_minor": 2,
 		"bigDataPool": {
-			"referenceName": "tcccibele2",
+			"referenceName": "tcccibele",
 			"type": "BigDataPoolReference"
 		},
 		"sessionProperties": {
@@ -17,7 +17,7 @@
 				"spark.dynamicAllocation.enabled": "false",
 				"spark.dynamicAllocation.minExecutors": "2",
 				"spark.dynamicAllocation.maxExecutors": "2",
-				"spark.autotune.trackingId": "47b7794c-749e-4c70-80f6-26f0463703bb"
+				"spark.autotune.trackingId": "94063c72-e0e9-4771-9826-0e1e8493ac75"
 			}
 		},
 		"metadata": {
@@ -31,10 +31,10 @@
 				"name": "python"
 			},
 			"a365ComputeOptions": {
-				"id": "/subscriptions/3768861a-a3bf-47a5-a888-a7be0541a195/resourceGroups/tcc_cibele2/providers/Microsoft.Synapse/workspaces/tcccibele2/bigDataPools/tcccibele2",
-				"name": "tcccibele2",
+				"id": "/subscriptions/3768861a-a3bf-47a5-a888-a7be0541a195/resourceGroups/Tcc_cibele/providers/Microsoft.Synapse/workspaces/tcc-cibele/bigDataPools/tcccibele",
+				"name": "tcccibele",
 				"type": "Spark",
-				"endpoint": "https://tcccibele2.dev.azuresynapse.net/livyApi/versions/2019-11-01-preview/sparkPools/tcccibele2",
+				"endpoint": "https://tcc-cibele.dev.azuresynapse.net/livyApi/versions/2019-11-01-preview/sparkPools/tcccibele",
 				"auth": {
 					"type": "AAD",
 					"authResource": "https://dev.azuresynapse.net"
@@ -65,7 +65,7 @@
 					"from pyspark.sql.types import StructField, StructType, IntegerType, StringType\r\n",
 					"from pyspark.sql import functions as f"
 				],
-				"execution_count": 13
+				"execution_count": 14
 			},
 			{
 				"cell_type": "code",
@@ -89,7 +89,7 @@
 					"    StructField(\"Total\", StringType(), True)\r\n",
 					"])"
 				],
-				"execution_count": 14
+				"execution_count": 15
 			},
 			{
 				"cell_type": "code",
@@ -111,7 +111,7 @@
 					"            .options(quote='\"') \\\r\n",
 					"            .load('/landing_zone/2019/Balanco-2019-Ligue180-Escolaridade Vitima.csv')"
 				],
-				"execution_count": 15
+				"execution_count": 16
 			},
 			{
 				"cell_type": "code",
@@ -135,7 +135,7 @@
 					"df = df.drop('None')\r\n",
 					"df = df.drop('Total')"
 				],
-				"execution_count": 16
+				"execution_count": 17
 			},
 			{
 				"cell_type": "code",
@@ -161,7 +161,7 @@
 					"\r\n",
 					"df = df.fillna(0)"
 				],
-				"execution_count": 17
+				"execution_count": 18
 			},
 			{
 				"cell_type": "code",
@@ -239,7 +239,7 @@
 					"dfAll = dfAll.unionAll(dfNov)\r\n",
 					"dfAll = dfAll.unionAll(dfDez)"
 				],
-				"execution_count": 18
+				"execution_count": 19
 			},
 			{
 				"cell_type": "code",
@@ -258,7 +258,7 @@
 					"# Escrever dados limpos em formato parquet no azure storage\r\n",
 					"dfAll.write.format('parquet').mode('overwrite').save('/history_zone/2019/EscolaridadeVitima/')"
 				],
-				"execution_count": 19
+				"execution_count": 20
 			}
 		]
 	}
