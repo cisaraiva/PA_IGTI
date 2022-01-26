@@ -4,7 +4,7 @@
 		"nbformat": 4,
 		"nbformat_minor": 2,
 		"bigDataPool": {
-			"referenceName": "tcccibele2",
+			"referenceName": "tcccibele",
 			"type": "BigDataPoolReference"
 		},
 		"sessionProperties": {
@@ -17,7 +17,7 @@
 				"spark.dynamicAllocation.enabled": "false",
 				"spark.dynamicAllocation.minExecutors": "2",
 				"spark.dynamicAllocation.maxExecutors": "2",
-				"spark.autotune.trackingId": "dfd27398-4b86-4214-b470-4bda5c74349d"
+				"spark.autotune.trackingId": "0454d084-c3d5-42c4-aa4d-e78bdfab466e"
 			}
 		},
 		"metadata": {
@@ -31,10 +31,10 @@
 				"name": "python"
 			},
 			"a365ComputeOptions": {
-				"id": "/subscriptions/3768861a-a3bf-47a5-a888-a7be0541a195/resourceGroups/tcc_cibele2/providers/Microsoft.Synapse/workspaces/tcccibele2/bigDataPools/tcccibele2",
-				"name": "tcccibele2",
+				"id": "/subscriptions/3768861a-a3bf-47a5-a888-a7be0541a195/resourceGroups/Tcc_cibele/providers/Microsoft.Synapse/workspaces/tcc-cibele/bigDataPools/tcccibele",
+				"name": "tcccibele",
 				"type": "Spark",
-				"endpoint": "https://tcccibele2.dev.azuresynapse.net/livyApi/versions/2019-11-01-preview/sparkPools/tcccibele2",
+				"endpoint": "https://tcc-cibele.dev.azuresynapse.net/livyApi/versions/2019-11-01-preview/sparkPools/tcccibele",
 				"auth": {
 					"type": "AAD",
 					"authResource": "https://dev.azuresynapse.net"
@@ -65,7 +65,7 @@
 					"import pandas\r\n",
 					"import pyspark.sql.functions as F"
 				],
-				"execution_count": 3
+				"execution_count": 1
 			},
 			{
 				"cell_type": "code",
@@ -92,7 +92,7 @@
 					")\r\n",
 					"display(df.limit(10))"
 				],
-				"execution_count": 4
+				"execution_count": 2
 			},
 			{
 				"cell_type": "code",
@@ -120,7 +120,7 @@
 					"df = df.withColumn('_c0', regexp_replace('_c0', 'VÍTIMA IDOSA;CRIANÇA;DEFICIENTE OU MINORIA ÉTNICA OU SOCIAL', \"VÍTIMA IDOSA,CRIANÇA,DEFICIENTE OU MINORIA ÉTNICA OU SOCIAL\"))\r\n",
 					""
 				],
-				"execution_count": 5
+				"execution_count": null
 			},
 			{
 				"cell_type": "code",
@@ -138,7 +138,7 @@
 				"source": [
 					"df.write.mode(\"overwrite\").csv(\"/landing_zone/2020/segundo_semestre_2020_1.csv\", encoding='ISO-8859-1')"
 				],
-				"execution_count": 6
+				"execution_count": null
 			}
 		]
 	}
