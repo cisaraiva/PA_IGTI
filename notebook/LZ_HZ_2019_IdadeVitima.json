@@ -17,7 +17,7 @@
 				"spark.dynamicAllocation.enabled": "false",
 				"spark.dynamicAllocation.minExecutors": "2",
 				"spark.dynamicAllocation.maxExecutors": "2",
-				"spark.autotune.trackingId": "0c69dc36-5757-47aa-956c-14b1a733b1b4"
+				"spark.autotune.trackingId": "85ba0268-6d65-4813-83cf-5fd910f814f9"
 			}
 		},
 		"metadata": {
@@ -89,7 +89,7 @@
 					"    StructField(\"Total\", StringType(), True)\r\n",
 					"])"
 				],
-				"execution_count": null
+				"execution_count": 2
 			},
 			{
 				"cell_type": "code",
@@ -111,7 +111,7 @@
 					"            .options(quote='\"') \\\r\n",
 					"            .load('/landing_zone/2019/Balanco-2019-Ligue180-Idade Vitima.csv')"
 				],
-				"execution_count": null
+				"execution_count": 3
 			},
 			{
 				"cell_type": "code",
@@ -135,7 +135,7 @@
 					"df = df.drop('None')\r\n",
 					"df = df.drop('Total')"
 				],
-				"execution_count": null
+				"execution_count": 4
 			},
 			{
 				"cell_type": "code",
@@ -161,7 +161,7 @@
 					"\r\n",
 					"df = df.fillna(0)"
 				],
-				"execution_count": null
+				"execution_count": 5
 			},
 			{
 				"cell_type": "code",
@@ -241,7 +241,7 @@
 					"\r\n",
 					"dfAll.toPandas()"
 				],
-				"execution_count": null
+				"execution_count": 6
 			},
 			{
 				"cell_type": "code",
@@ -260,7 +260,7 @@
 					"# Escrever dados limpos em formato parque no azure storage\r\n",
 					"dfAll.write.format('parquet').mode('overwrite').save('/history_zone/2019/IdadeVitima/')"
 				],
-				"execution_count": null
+				"execution_count": 7
 			}
 		]
 	}
