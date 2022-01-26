@@ -4,7 +4,7 @@
 		"nbformat": 4,
 		"nbformat_minor": 2,
 		"bigDataPool": {
-			"referenceName": "tcccibele2",
+			"referenceName": "tcccibele",
 			"type": "BigDataPoolReference"
 		},
 		"sessionProperties": {
@@ -17,7 +17,7 @@
 				"spark.dynamicAllocation.enabled": "false",
 				"spark.dynamicAllocation.minExecutors": "2",
 				"spark.dynamicAllocation.maxExecutors": "2",
-				"spark.autotune.trackingId": "93d19e72-13fb-4bb9-b6a6-f540b054d3d7"
+				"spark.autotune.trackingId": "0745863a-885b-434c-807b-fb331c8d36f4"
 			}
 		},
 		"metadata": {
@@ -31,10 +31,10 @@
 				"name": "python"
 			},
 			"a365ComputeOptions": {
-				"id": "/subscriptions/3768861a-a3bf-47a5-a888-a7be0541a195/resourceGroups/tcc_cibele2/providers/Microsoft.Synapse/workspaces/tcccibele2/bigDataPools/tcccibele2",
-				"name": "tcccibele2",
+				"id": "/subscriptions/3768861a-a3bf-47a5-a888-a7be0541a195/resourceGroups/Tcc_cibele/providers/Microsoft.Synapse/workspaces/tcc-cibele/bigDataPools/tcccibele",
+				"name": "tcccibele",
 				"type": "Spark",
-				"endpoint": "https://tcccibele2.dev.azuresynapse.net/livyApi/versions/2019-11-01-preview/sparkPools/tcccibele2",
+				"endpoint": "https://tcc-cibele.dev.azuresynapse.net/livyApi/versions/2019-11-01-preview/sparkPools/tcccibele",
 				"auth": {
 					"type": "AAD",
 					"authResource": "https://dev.azuresynapse.net"
@@ -65,7 +65,7 @@
 					"import pandas\r\n",
 					"import pyspark.sql.functions as F"
 				],
-				"execution_count": 6
+				"execution_count": 5
 			},
 			{
 				"cell_type": "code",
@@ -86,13 +86,13 @@
 				},
 				"source": [
 					"%%pyspark\r\n",
-					"df = spark.read.load('abfss://tcccibele2@tcccibele2.dfs.core.windows.net/landing_zone/2020/primeiro_semestre_2020.csv'\r\n",
+					"df = spark.read.load('/landing_zone/2020/primeiro_semestre_2020.csv'\r\n",
 					"    ,format='csv'\r\n",
 					"    ,encoding='ISO-8859-1'\r\n",
 					")\r\n",
 					"display(df.limit(10))"
 				],
-				"execution_count": 7
+				"execution_count": 6
 			},
 			{
 				"cell_type": "code",
@@ -121,7 +121,7 @@
 					"df = df.withColumn('_c0', regexp_replace('_c0', 'VÍTIMA IDOSA;CRIANÇA;DEFICIENTE OU MINORIA ÉTNICA OU SOCIAL', \"VÍTIMA IDOSA,CRIANÇA,DEFICIENTE OU MINORIA ÉTNICA OU SOCIAL\"))\r\n",
 					""
 				],
-				"execution_count": 8
+				"execution_count": 7
 			},
 			{
 				"cell_type": "code",
@@ -139,7 +139,7 @@
 				"source": [
 					"df.write.mode(\"overwrite\").csv(\"/landing_zone/2020/primeiro_semestre_2020_1.csv\", encoding='ISO-8859-1')"
 				],
-				"execution_count": 9
+				"execution_count": 8
 			}
 		]
 	}
