@@ -17,7 +17,7 @@
 				"spark.dynamicAllocation.enabled": "false",
 				"spark.dynamicAllocation.minExecutors": "2",
 				"spark.dynamicAllocation.maxExecutors": "2",
-				"spark.autotune.trackingId": "ece96bf8-aa75-459e-a522-8abda3cee364"
+				"spark.autotune.trackingId": "83566dec-9c6c-437d-a07a-1862a26056f0"
 			}
 		},
 		"metadata": {
@@ -65,7 +65,7 @@
 					"PrimeiroSemestre = spark.read.parquet('/history_zone/2020/PrimeiroSemestre/')\r\n",
 					"SegundoSemestre = spark.read.parquet('/history_zone/2020/SegundoSemestre/')"
 				],
-				"execution_count": 9
+				"execution_count": 2
 			},
 			{
 				"cell_type": "markdown",
@@ -104,7 +104,7 @@
 					"\r\n",
 					"df2020 = PrimeiroSemestre.unionAll(SegundoSemestre)"
 				],
-				"execution_count": 10
+				"execution_count": null
 			},
 			{
 				"cell_type": "code",
@@ -122,7 +122,7 @@
 				"source": [
 					"df2020.write.partitionBy(\"Ano\",\"Mes\").mode(\"overwrite\").parquet(\"/consumer_zone/2020/\")"
 				],
-				"execution_count": 11
+				"execution_count": null
 			}
 		]
 	}
